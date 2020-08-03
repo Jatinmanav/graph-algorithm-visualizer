@@ -15,13 +15,13 @@
   justify-content: flex-end;
 }
 
-input[type=checkbox] {
+.toggle-switch {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-label {
+.toggle-label {
   cursor: pointer;
   text-indent: -9999px;
   width: 52px;
@@ -32,7 +32,7 @@ label {
   position: relative;
 }
 
-label:after {
+.toggle-label:after {
   content: '';
   position: absolute;
   top: 3px;
@@ -44,16 +44,16 @@ label:after {
   transition: 0.3s;
 }
 
-input:checked+label {
+.toggle-switch:checked+.toggle-label {
   background: var(--color-headings);
 }
 
-input:checked+label:after {
+.toggle-switch:checked+.toggle-label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
 }
 
-label:active:after {
+.toggle-label:active:after {
   width: 45px;
 }
 

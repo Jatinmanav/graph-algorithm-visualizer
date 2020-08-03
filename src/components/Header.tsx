@@ -26,12 +26,14 @@ const Header = () => {
         <input
           type="checkbox"
           id="switch"
-          className="toggleSwitch"
+          className="toggle-switch"
           onClick={(event) => {
             handleChange((event.target as HTMLInputElement).checked);
           }}
         />
-        <label htmlFor="switch">Toggle</label>
+        <label className="toggle-label" htmlFor="switch">
+          Toggle
+        </label>
       </div>
     </header>
   );
