@@ -1,16 +1,16 @@
 [data-theme="light"] {
   --header-color: #333333;
-  --color-headings: #0077FF;
+  --color-headings: #0077ff;
 }
 
 [data-theme="dark"] {
   --header-color: #eeeeee;
-  --color-headings: #3694FF;
+  --color-headings: #3694ff;
 }
 
 .navbar {
   background-color: var(--header-color);
-  padding: 4%;
+  padding: 1.5em;
   display: flex;
   justify-content: flex-end;
 }
@@ -33,7 +33,7 @@
 }
 
 .toggle-label:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 3px;
   left: 3px;
@@ -44,11 +44,11 @@
   transition: 0.3s;
 }
 
-.toggle-switch:checked+.toggle-label {
+.toggle-switch:checked + .toggle-label {
   background: var(--color-headings);
 }
 
-.toggle-switch:checked+.toggle-label:after {
+.toggle-switch:checked + .toggle-label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
 }
