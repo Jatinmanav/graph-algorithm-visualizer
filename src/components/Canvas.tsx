@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import useWindowSize from "../hooks/windowSize";
+import node from "../types/node";
+import createNode from "../actions/createNode";
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,8 +18,15 @@ const Canvas = () => {
       console.log("x: " + x + " y: " + y);
       if (context) {
         context.beginPath();
-        context.arc(x, y, 10, 0, 2 * Math.PI, false);
-        context.fill();
+        context.arc(x, y, 20, 0, 2 * Math.PI, false);
+        context.lineWidth = 3;
+        context.stroke();
+        context.font = "20px Hack";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText("1", x, y);
+        let newNode: node = createNode(0, x, y);
+        console.log(newNode);
       }
     }
   };
@@ -30,7 +39,7 @@ const Canvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-  }, []);
+  }, [width, height]);
 
   return (
     <div className="canvas-container">
