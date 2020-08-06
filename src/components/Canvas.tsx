@@ -10,9 +10,10 @@ const Canvas = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const [width, height] = useWindowSize();
-  const { adjacencyList, addNode } = useContext<adjacencyListProvider>(
+  const { nodeList, edgeList, addNode } = useContext<adjacencyListProvider>(
     AdjacencyListContext
   );
+  console.log(edgeList);
 
   const handleClick = (clientX: number, clientY: number): void => {
     if (canvas) {
@@ -32,7 +33,7 @@ const Canvas = () => {
         let newNode: node = createNode(0, x, y);
         addNode(newNode);
         console.log(newNode);
-        console.log(adjacencyList);
+        console.log(nodeList);
       }
     }
   };

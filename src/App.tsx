@@ -7,12 +7,12 @@ import { AdjacencyListContextProvider } from "./contexts/AdjacencyListContext";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Header />
-      <div className="container">
-        <AdjacencyListContextProvider>
+      <AdjacencyListContextProvider>
+        <Header />
+        <div className="container">
           <Canvas />
-        </AdjacencyListContextProvider>
-      </div>
+        </div>
+      </AdjacencyListContextProvider>
     </div>
   );
 };

@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../styles/Header.scss";
+import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 
 const Header = () => {
+  const { nodeList, edgeList, addNode, addEdge } = useContext(
+    AdjacencyListContext
+  );
+  console.log(nodeList, edgeList, addNode, addEdge);
+
   const handleChange = (value: boolean): void => {
     console.log("test");
     if (value) {
