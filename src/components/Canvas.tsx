@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import useWindowSize from "../hooks/windowSize";
 import node from "../types/node";
 import createNode from "../actions/createNode";
+import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import adjacencyListProvider from "../types/adjacencyListProvider";
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const [width, height] = useWindowSize();
-  console.log(width, height);
+  const { adjacencyList, addNode } = useContext<adjacencyListProvider>(
+    AdjacencyListContext
+  );
 
   const handleClick = (clientX: number, clientY: number): void => {
     if (canvas) {
@@ -26,7 +30,9 @@ const Canvas = () => {
         context.textBaseline = "middle";
         context.fillText("1", x, y);
         let newNode: node = createNode(0, x, y);
+        addNode(newNode);
         console.log(newNode);
+        console.log(adjacencyList);
       }
     }
   };
