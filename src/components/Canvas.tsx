@@ -22,6 +22,7 @@ const Canvas = () => {
       const y = clientY - rect.top;
       console.log("x: " + x + " y: " + y);
       if (context) {
+        const nodeCount: number = nodeList.length;
         context.beginPath();
         context.arc(x, y, 20, 0, 2 * Math.PI, false);
         context.lineWidth = 3;
@@ -29,8 +30,8 @@ const Canvas = () => {
         context.font = "20px Hack";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillText("1", x, y);
-        let newNode: node = createNode(0, x, y);
+        context.fillText(nodeCount.toString(), x, y);
+        let newNode: node = createNode(nodeCount, x, y);
         addNode(newNode);
         console.log(newNode);
         console.log(nodeList);

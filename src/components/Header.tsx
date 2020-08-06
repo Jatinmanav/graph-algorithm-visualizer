@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/Header.scss";
+import node from "../types/node";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 
 const Header = () => {
+  const [source, setSource] = useState<string>("");
+  const [target, setTarget] = useState<string>("");
   const { nodeList, edgeList, addNode, addEdge } = useContext(
     AdjacencyListContext
   );
   console.log(nodeList, edgeList, addNode, addEdge);
+  let newNode: node = nodeList[0];
+  console.log(newNode);
 
-  const handleChange = (value: boolean): void => {
+  const handleThemeChange = (value: boolean): void => {
     console.log("test");
     if (value) {
       trans();
@@ -17,6 +22,14 @@ const Header = () => {
       trans();
       document.documentElement.setAttribute("data-theme", "light");
     }
+  };
+
+  const handleSourceChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    setSource((event.target as HTMLSelectElement).value);
+  };
+
+  const handleTargetChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    setTarget((event.target as HTMLSelectElement).value);
   };
 
   let trans = () => {
@@ -28,13 +41,45 @@ const Header = () => {
 
   return (
     <header className="navbar">
+      <select
+        value={source}
+        onChange={handleSourceChange}
+        className="source-node"
+      >
+        {nodeList.map((node) => {
+          return (
+            <option
+              key={node.count}
+              value={node.count}
+            >{`Node ${node.count}`}</option>
+          );
+        })}
+      </select>
+      <select
+        value={target}
+        onChange={handleTargetChange}
+        className="target-node"
+      >
+        {nodeList.map((node: node) => {
+          if (node.count.toString() !== source) {
+            return (
+              <option
+                key={node.count}
+                value={node.count}
+              >{`Node ${node.count}`}</option>
+            );
+          } else {
+            return <React.Fragment key={Math.random() * 100} />;
+          }
+        })}
+      </select>
       <div className="toggle-container">
         <input
           type="checkbox"
           id="switch"
           className="toggle-switch"
           onClick={(event) => {
-            handleChange((event.target as HTMLInputElement).checked);
+            handleThemeChange((event.target as HTMLInputElement).checked);
           }}
         />
         <label className="toggle-label" htmlFor="switch">

@@ -11,8 +11,21 @@
 .navbar {
   background-color: var(--header-color);
   padding: 1.5em;
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 1em;
+}
+
+.source-node {
+  grid-column: 1;
+}
+
+.target-node {
+  grid-column: 2;
+}
+
+.toggle-container {
+  grid-column: 7;
 }
 
 .toggle-switch {
@@ -44,11 +57,11 @@
   transition: 0.3s;
 }
 
-.toggle-switch:checked + .toggle-label {
+.toggle-switch:checked+.toggle-label {
   background: var(--color-headings);
 }
 
-.toggle-switch:checked + .toggle-label:after {
+.toggle-switch:checked+.toggle-label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
 }
