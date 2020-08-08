@@ -2,6 +2,9 @@ import React, { useContext, useState } from "react";
 import "../styles/Header.scss";
 import node from "../types/node";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import canvasProvider from "../types/canvasProvider";
+import { CanvasContext } from "../contexts/CanvasContext";
+import drawEdge from "../actions/drawEdge";
 
 const Header = () => {
   const [source, setSource] = useState<string>("");
@@ -9,6 +12,7 @@ const Header = () => {
   const { nodeList, edgeList, addNode, addEdge } = useContext(
     AdjacencyListContext
   );
+  const { canvas, context } = useContext<canvasProvider>(CanvasContext);
   console.log(nodeList, edgeList, addNode, addEdge);
   let newNode: node = nodeList[0];
   console.log(newNode);
@@ -30,6 +34,15 @@ const Header = () => {
 
   const handleTargetChange = (event: React.FormEvent<HTMLSelectElement>) => {
     setTarget((event.target as HTMLSelectElement).value);
+  };
+
+  const handleNewEdge = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (context && canvas) {
+      const sourceNum = +source;
+      const targetNum = +target;
+      drawEdge(nodeList, sourceNum, targetNum, context);
+    }
   };
 
   let trans = () => {
@@ -73,6 +86,9 @@ const Header = () => {
           }
         })}
       </select>
+      <button className="add-edge" onClick={handleNewEdge}>
+        Add Edge
+      </button>
       <div className="toggle-container">
         <input
           type="checkbox"
