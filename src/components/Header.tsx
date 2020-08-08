@@ -6,6 +6,7 @@ import canvasProvider from "../types/canvasProvider";
 import { CanvasContext } from "../contexts/CanvasContext";
 import drawEdge from "../actions/drawEdge";
 import drawNode from "../actions/drawNode";
+import edge from "../types/edge";
 
 const Header = () => {
   const [source, setSource] = useState<string>("");
@@ -43,6 +44,11 @@ const Header = () => {
       const sourceNum = +source;
       const targetNum = +target;
       drawEdge(nodeList, sourceNum, targetNum, context);
+      const newEdge: edge = {
+        source: nodeList[sourceNum],
+        target: nodeList[targetNum],
+      };
+      addEdge(newEdge);
       drawNode(
         sourceNum,
         context,

@@ -27,7 +27,7 @@ const Canvas = () => {
       if (context) {
         const nodeCount: number = nodeList.length;
         drawNode(nodeCount, context, x, y);
-        let newNode: node = createNode(
+        const newNode: node = createNode(
           nodeCount,
           x,
           y,
