@@ -9,8 +9,10 @@ const drawNode = (
   context.lineWidth = 3;
   context.fillStyle = "#ffffff";
   context.fill();
-  context.font = "20px Hack";
   context.fillStyle = "#000000";
+  context.arc(x, y, 20, 0, 2 * Math.PI, false);
+  context.stroke();
+  context.font = "20px Hack";
   context.textAlign = "center";
   context.textBaseline = "middle";
   context.fillText(nodeCount.toString(), x, y);
