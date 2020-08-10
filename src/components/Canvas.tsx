@@ -41,6 +41,11 @@ const Canvas = () => {
     }
   };
 
+  const handleRightClick = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    console.log(event.clientX, event.clientY);
+  };
+
   useEffect(() => {
     let canvas = canvasRef.current;
     if (canvas) {
@@ -57,6 +62,7 @@ const Canvas = () => {
         ref={canvasRef}
         onClick={(event) => handleClick(event.clientX, event.clientY)}
         className="canvas"
+        onContextMenu={handleRightClick}
       />
     </div>
   );
