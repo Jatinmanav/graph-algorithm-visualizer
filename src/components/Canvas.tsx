@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import useWindowSize from "../hooks/windowSize";
 import node from "../types/node";
-import createNode from "../actions/createNode";
-import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import adjacencyListProvider from "../types/adjacencyListProvider";
-import { CanvasContext } from "../contexts/CanvasContext";
 import canvasProvider from "../types/canvasProvider";
+import contextMenu from "../types/contextMenu";
+import createNode from "../actions/createNode";
 import drawNode from "../actions/drawNode";
+import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import { CanvasContext } from "../contexts/CanvasContext";
 
 const Canvas = () => {
-  const [contextmenu, setContextMenu] = useState<boolean>(false);
+  const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
+  const [contextmenu, setContextMenu] = useState<contextMenu>(
+    initialContextMenu
+  );
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useWindowSize();
   const { nodeList, edgeList, addNode } = useContext<adjacencyListProvider>(
@@ -18,10 +22,24 @@ const Canvas = () => {
   const { canvas, context, setCanvas, setContext } = useContext<canvasProvider>(
     CanvasContext
   );
+
   console.log(edgeList);
 
+  const setContextMenuState = (
+    state: boolean,
+    x: number = 0,
+    y: number = 0
+  ): void => {
+    const newContextMenuState: contextMenu = {
+      isOpen: state,
+      x: x,
+      y: y,
+    };
+    setContextMenu(newContextMenuState);
+  };
+
   const handleClick = (event: React.MouseEvent): void => {
-    if (contextmenu === false) {
+    if (contextmenu.isOpen === false) {
       if (canvas) {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
@@ -42,13 +60,13 @@ const Canvas = () => {
         }
       }
     } else {
-      setContextMenu(false);
+      setContextMenuState(false);
     }
   };
 
   const handleRightClick = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setContextMenu(true);
+    setContextMenuState(true, event.clientX, event.clientY);
     console.log(event.clientX, event.clientY);
   };
 
