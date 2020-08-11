@@ -8,6 +8,7 @@ import createNode from "../actions/createNode";
 import drawNode from "../actions/drawNode";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
+import Contextmenu from "./Contextmenu";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
@@ -66,8 +67,7 @@ const Canvas = () => {
 
   const handleRightClick = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setContextMenuState(true, event.clientX, event.clientY);
-    console.log(event.clientX, event.clientY);
+    setContextMenuState(true, event.pageX, event.pageY);
   };
 
   useEffect(() => {
@@ -82,6 +82,11 @@ const Canvas = () => {
 
   return (
     <div className="canvas-container">
+      {contextmenu.isOpen ? (
+        <Contextmenu contextmenu={contextmenu} />
+      ) : (
+        <React.Fragment />
+      )}
       <canvas
         ref={canvasRef}
         onClick={handleClick}
