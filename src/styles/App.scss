@@ -1,7 +1,24 @@
+[data-theme="light"] {
+  --header-color: #333333;
+  --color-headings: #0077ff;
+}
+
+[data-theme="dark"] {
+  --header-color: #eeeeee;
+  --color-headings: #3694ff;
+}
+
 .App {}
 
 .canvas {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.context-menu {
+  color: var(--header-color);
+  width: 200px;
+  height: 300px;
+  border: var(--header-color) 2px solid;
 }
