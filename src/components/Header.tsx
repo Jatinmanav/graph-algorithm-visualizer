@@ -11,7 +11,7 @@ import edge from "../types/edge";
 const Header = () => {
   const [source, setSource] = useState<string>("");
   const [target, setTarget] = useState<string>("");
-  const { nodeList, edgeList, addNode, addEdge } = useContext(
+  const { nodeList, edgeList, addNode, addEdge, clearNodes } = useContext(
     AdjacencyListContext
   );
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
@@ -64,6 +64,14 @@ const Header = () => {
     }
   };
 
+  const handleClearCanvas = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (context && canvas) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      clearNodes();
+    }
+  };
+
   let trans = () => {
     document.documentElement.classList.add("transition");
     window.setTimeout(() => {
@@ -107,6 +115,9 @@ const Header = () => {
       </select>
       <button className="add-edge" onClick={handleNewEdge}>
         Add Edge
+      </button>
+      <button className="clear-canvas" onClick={handleClearCanvas}>
+        Clear Canvas
       </button>
       <div className="toggle-container">
         <input
