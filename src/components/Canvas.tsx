@@ -83,7 +83,10 @@ const Canvas = () => {
   return (
     <div className="canvas-container">
       {contextmenu.isOpen ? (
-        <Contextmenu contextmenu={contextmenu} />
+        <Contextmenu
+          contextmenu={contextmenu}
+          setContextMenuState={setContextMenuState}
+        />
       ) : (
         <React.Fragment />
       )}
