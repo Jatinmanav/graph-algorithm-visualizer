@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { CanvasContext } from "../contexts/CanvasContext";
+import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import node from "../types/node";
 import contextMenu from "../types/contextMenu";
 import canvasProvider from "../types/canvasProvider";
+import adjacencyListProvider from "../types/adjacencyListProvider";
+import drawNode from "../actions/drawNode";
+import createNode from "../actions/createNode";
 
 type AppProps = { contextmenu: contextMenu };
 
@@ -9,6 +14,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
+  const { nodeList, addNode } = useContext<adjacencyListProvider>(
+    AdjacencyListContext
+  );
   let innerX = x;
   let innerY = y;
   if (x + 200 > window.innerWidth) {
@@ -24,8 +32,24 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
 
   const handleAddNode = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
-    console.log("Add Node");
-    setContextMenuState(false);
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const xPos = x - rect.left;
+      const yPos = y - rect.top;
+      if (context) {
+        const nodeCount: number = nodeList.length;
+        drawNode(nodeCount, context, xPos, yPos);
+        const newNode: node = createNode(
+          nodeCount,
+          xPos,
+          yPos,
+          rect.right,
+          rect.bottom
+        );
+        addNode(newNode);
+      }
+      setContextMenuState(false);
+    }
   };
 
   const handleClearCanvas = (event: React.FormEvent<HTMLDivElement>): void => {
