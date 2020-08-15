@@ -14,7 +14,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  const { nodeList, addNode } = useContext<adjacencyListProvider>(
+  const { nodeList, addNode, clearNodes } = useContext<adjacencyListProvider>(
     AdjacencyListContext
   );
   let innerX = x;
@@ -55,6 +55,10 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
   const handleClearCanvas = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
     console.log("Clear Canvas");
+    if (context && canvas) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      clearNodes();
+    }
     setContextMenuState(false);
   };
 

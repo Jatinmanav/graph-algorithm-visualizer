@@ -8,7 +8,7 @@ import createNode from "../actions/createNode";
 import drawNode from "../actions/drawNode";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
-import Contextmenu from "./Contextmenu";
+import Contextmenu from "../components/Contextmenu";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
