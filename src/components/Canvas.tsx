@@ -52,6 +52,8 @@ const Canvas = () => {
             nodeCount,
             x,
             y,
+            event.clientX,
+            event.clientY,
             rect.right,
             rect.bottom
           );

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { CanvasContext } from "../contexts/CanvasContext";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import node from "../types/node";
@@ -7,16 +7,21 @@ import canvasProvider from "../types/canvasProvider";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import drawNode from "../actions/drawNode";
 import createNode from "../actions/createNode";
+import contextMenuState from "../actions/contextMenuState";
 
-type AppProps = { contextmenu: contextMenu };
+type AppProps = {
+  contextmenu: contextMenu;
+  setContextMenuState(state: boolean, x?: number, y?: number): void;
+};
 
-const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
+const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
   const { nodeList, addNode, clearNodes } = useContext<adjacencyListProvider>(
     AdjacencyListContext
   );
+
   let innerX = x;
   let innerY = y;
   if (x + 200 > window.innerWidth) {
@@ -25,6 +30,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
   if (y + 170 > window.innerHeight) {
     innerY = y - 170;
   }
+  useEffect(() => {}, [x, y, nodeList]);
+
+  const result = contextMenuState(nodeList, x, y);
 
   const handleRightClick = (event: React.MouseEvent): void => {
     event.preventDefault();
@@ -43,6 +51,8 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
           nodeCount,
           xPos,
           yPos,
+          x,
+          y,
           rect.right,
           rect.bottom
         );
@@ -84,18 +94,27 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: any) => {
       style={{ left: innerX, top: innerY, position: "absolute" }}
       onContextMenu={handleRightClick}
     >
-      <div className="context-menu-option" onClick={handleAddNode}>
-        Add Node
-      </div>
-      <div className="context-menu-option" onClick={handleClearCanvas}>
-        Clear Canvas
-      </div>
-      <div className="context-menu-option" onClick={handleAddDirectedEdge}>
-        Add Direceted Edge
-      </div>
-      <div className="context-menu-option" onClick={handleAddUndirectedEdge}>
-        Add Undirected Edge
-      </div>
+      {result ? (
+        <div>
+          <div className="context-menu-option" onClick={handleAddNode}>
+            Add Node
+          </div>
+          <div className="context-menu-option" onClick={handleClearCanvas}>
+            Clear Canvas
+          </div>
+          <div className="context-menu-option" onClick={handleAddDirectedEdge}>
+            Add Direceted Edge
+          </div>
+          <div
+            className="context-menu-option"
+            onClick={handleAddUndirectedEdge}
+          >
+            Add Undirected Edge
+          </div>
+        </div>
+      ) : (
+        <div className="context-menu-option">Test</div>
+      )}
     </div>
   );
 };

@@ -52,14 +52,14 @@ const Header = () => {
       drawNode(
         sourceNum,
         context,
-        nodeList[sourceNum].x,
-        nodeList[sourceNum].y
+        nodeList[sourceNum].canvasX,
+        nodeList[sourceNum].canvasY
       );
       drawNode(
         targetNum,
         context,
-        nodeList[targetNum].x,
-        nodeList[targetNum].y
+        nodeList[targetNum].canvasX,
+        nodeList[targetNum].canvasY
       );
     }
   };
