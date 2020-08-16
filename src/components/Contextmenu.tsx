@@ -18,9 +18,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  const { nodeList, addNode, clearNodes } = useContext<adjacencyListProvider>(
-    AdjacencyListContext
-  );
+  const { nodeList, addNode, clearNodes, deleteNode } = useContext<
+    adjacencyListProvider
+  >(AdjacencyListContext);
 
   let innerX = x;
   let innerY = y;
@@ -88,6 +88,11 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
     setContextMenuState(false);
   };
 
+  const handleDeleteNode = (event: React.FormEvent<HTMLDivElement>): void => {
+    deleteNode(x, y);
+    setContextMenuState(false);
+  };
+
   return (
     <div
       className="context-menu"
@@ -113,7 +118,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
           </div>
         </div>
       ) : (
-        <div className="context-menu-option">Test</div>
+        <div className="context-menu-option" onClick={handleDeleteNode}>
+          Delete Node
+        </div>
       )}
     </div>
   );

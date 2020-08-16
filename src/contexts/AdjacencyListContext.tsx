@@ -8,6 +8,7 @@ const initialState: adjacencyListProvider = {
   edgeList: [],
   addNode: (node: node) => {},
   addEdge: (edge: edge) => {},
+  deleteNode: (x: number, y: number) => {},
   clearNodes: () => {},
 };
 
@@ -31,6 +32,21 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     setEdgeList([...edgeList, edge]);
   };
 
+  const deleteNode = (x: number, y: number) => {
+    let index;
+    for (let iter of nodeList) {
+      if (Math.abs(x - iter.clientX) < 20 && Math.abs(y - iter.clientY) < 20) {
+        index = iter.count;
+        break;
+      }
+    }
+    if (index) {
+      let temp = nodeList.splice(index, 1);
+      console.log("spliced");
+      setNodeList(temp);
+    }
+  };
+
   const clearNodes = () => {
     setNodeList([]);
     setEdgeList([]);
@@ -38,7 +54,7 @@ export const AdjacencyListContextProvider = (props: IProps) => {
 
   return (
     <AdjacencyListContext.Provider
-      value={{ nodeList, edgeList, addNode, addEdge, clearNodes }}
+      value={{ nodeList, edgeList, addNode, addEdge, clearNodes, deleteNode }}
     >
       {props.children}
     </AdjacencyListContext.Provider>
