@@ -15,9 +15,7 @@ const Header = () => {
     AdjacencyListContext
   );
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  console.log(nodeList, edgeList, addNode, addEdge);
   let newNode: node = nodeList[0];
-  console.log(newNode);
 
   const handleThemeChange = (value: boolean): void => {
     console.log("test");

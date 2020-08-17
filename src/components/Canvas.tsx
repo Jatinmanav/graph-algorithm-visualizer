@@ -24,8 +24,6 @@ const Canvas = () => {
     CanvasContext
   );
 
-  console.log(edgeList);
-
   const setContextMenuState = (
     state: boolean,
     x: number = 0,
@@ -47,6 +45,7 @@ const Canvas = () => {
         const y = event.clientY - rect.top;
         if (context) {
           const nodeCount: number = nodeList.length;
+          console.log(nodeCount);
           drawNode(nodeCount, context, x, y);
           const newNode: node = createNode(
             nodeCount,

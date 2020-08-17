@@ -37,11 +37,12 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     for (let iter of nodeList) {
       if (Math.abs(x - iter.clientX) < 20 && Math.abs(y - iter.clientY) < 20) {
         index = iter.count;
-        break;
+        console.log(index);
       }
     }
     if (index) {
-      let temp = nodeList.splice(index, 1);
+      let temp = nodeList;
+      temp.splice(index, 1);
       console.log("spliced");
       setNodeList(temp);
     }
