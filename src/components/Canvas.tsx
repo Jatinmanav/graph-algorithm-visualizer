@@ -9,6 +9,7 @@ import drawNode from "../actions/drawNode";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
 import Contextmenu from "../components/Contextmenu";
+import getNextIndex from "../actions/getNextIndex";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
@@ -44,7 +45,7 @@ const Canvas = () => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         if (context) {
-          const nodeCount: number = nodeList.length;
+          const nodeCount: number = getNextIndex(nodeList);
           console.log(nodeCount);
           drawNode(nodeCount, context, x, y);
           const newNode: node = createNode(

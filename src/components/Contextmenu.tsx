@@ -8,6 +8,7 @@ import adjacencyListProvider from "../types/adjacencyListProvider";
 import drawNode from "../actions/drawNode";
 import createNode from "../actions/createNode";
 import contextMenuState from "../actions/contextMenuState";
+import getNextIndex from "../actions/getNextIndex";
 
 type AppProps = {
   contextmenu: contextMenu;
@@ -45,7 +46,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
       const xPos = x - rect.left;
       const yPos = y - rect.top;
       if (context) {
-        const nodeCount: number = nodeList.length;
+        const nodeCount: number = getNextIndex(nodeList);
         drawNode(nodeCount, context, xPos, yPos);
         const newNode: node = createNode(
           nodeCount,
