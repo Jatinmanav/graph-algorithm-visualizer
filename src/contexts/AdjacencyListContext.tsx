@@ -36,30 +36,21 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     let index: number = 0;
     for (let iter of nodeList) {
       if (Math.abs(x - iter.clientX) < 20 && Math.abs(y - iter.clientY) < 20) {
-        console.log(index);
-        break;
+        index = iter.count;
       }
-      index += 1;
     }
-    if (index !== null) {
-      console.log(index);
-      let tempTwo = edgeList;
-      for (let itr = tempTwo.length - 1; itr >= 0; itr--) {
-        console.log(tempTwo[itr].source);
-        if (
-          tempTwo[itr].source.count === index ||
-          tempTwo[itr].target.count === index
-        ) {
-          console.log("Deleted Edge");
-          tempTwo.splice(itr, 1);
-          setEdgeList(tempTwo);
-        }
-      }
-      let temp = nodeList;
-      temp.splice(index, 1);
-      console.log("spliced");
-      setNodeList(temp);
-    }
+    const tempTwo = edgeList.filter((item) => {
+      console.log(item.source.count, item.target.count, index);
+      return item.source.count !== index && item.target.count !== index;
+    });
+    setEdgeList(tempTwo);
+    const temp = nodeList.filter((item) => {
+      return item.count !== index;
+    });
+
+    console.log("spliced");
+    setNodeList(temp);
+    console.log(edgeList);
   };
 
   const clearNodes = () => {

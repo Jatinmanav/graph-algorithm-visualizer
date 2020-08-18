@@ -4,8 +4,6 @@ import node from "../types/node";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import canvasProvider from "../types/canvasProvider";
 import { CanvasContext } from "../contexts/CanvasContext";
-import drawEdge from "../actions/drawEdge";
-import drawNode from "../actions/drawNode";
 import edge from "../types/edge";
 
 const Header = () => {
@@ -42,6 +40,7 @@ const Header = () => {
       let sourceNum: number = +source;
       let targetNum: number = +target;
       for (let itr in nodeList) {
+        console.log(sourceNum, targetNum);
         if (nodeList[itr].count === sourceNum) {
           sourceNum = +itr;
         } else if (nodeList[itr].count === targetNum) {

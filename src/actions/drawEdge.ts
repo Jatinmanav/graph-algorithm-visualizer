@@ -1,22 +1,14 @@
 import node from "../types/node";
 
 const drawEdge = (
-  nodeList: node[],
-  source: number,
-  target: number,
+  source: node,
+  target: node,
   context: CanvasRenderingContext2D
 ): void => {
-  for (let itr in nodeList) {
-    if (nodeList[itr].count === source) {
-      source = +itr;
-    } else if (nodeList[itr].count === target) {
-      target = +itr;
-    }
-  }
-  const sourceX = nodeList[source].canvasX;
-  const sourceY = nodeList[source].canvasY;
-  const targetX = nodeList[target].canvasX;
-  const targetY = nodeList[target].canvasY;
+  const sourceX = source.canvasX;
+  const sourceY = source.canvasY;
+  const targetX = target.canvasX;
+  const targetY = target.canvasY;
   context.lineWidth = 3;
   context.beginPath();
   context.moveTo(sourceX, sourceY);
