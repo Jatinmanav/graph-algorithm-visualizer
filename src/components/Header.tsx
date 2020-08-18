@@ -39,8 +39,15 @@ const Header = () => {
   const handleNewEdge = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (context && canvas) {
-      const sourceNum = +source;
-      const targetNum = +target;
+      let sourceNum: number = +source;
+      let targetNum: number = +target;
+      for (let itr in nodeList) {
+        if (nodeList[itr].count === sourceNum) {
+          sourceNum = +itr;
+        } else if (nodeList[itr].count === targetNum) {
+          targetNum = +itr;
+        }
+      }
       const newEdge: edge = {
         source: nodeList[sourceNum],
         target: nodeList[targetNum],

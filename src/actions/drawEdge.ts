@@ -6,6 +6,13 @@ const drawEdge = (
   target: number,
   context: CanvasRenderingContext2D
 ): void => {
+  for (let itr in nodeList) {
+    if (nodeList[itr].count === source) {
+      source = +itr;
+    } else if (nodeList[itr].count === target) {
+      target = +itr;
+    }
+  }
   const sourceX = nodeList[source].canvasX;
   const sourceY = nodeList[source].canvasY;
   const targetX = nodeList[target].canvasX;
