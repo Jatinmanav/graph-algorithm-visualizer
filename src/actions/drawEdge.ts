@@ -10,6 +10,7 @@ const drawEdge = (
   const sourceY = nodeList[source].canvasY;
   const targetX = nodeList[target].canvasX;
   const targetY = nodeList[target].canvasY;
+  context.lineWidth = 3;
   context.beginPath();
   context.moveTo(sourceX, sourceY);
   context.lineTo(targetX, targetY);

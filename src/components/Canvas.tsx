@@ -10,6 +10,7 @@ import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
 import Contextmenu from "../components/Contextmenu";
 import getNextIndex from "../actions/getNextIndex";
+import redrawCanvas from "../actions/redrawCanvas";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
@@ -80,6 +81,7 @@ const Canvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
+    redrawCanvas(nodeList, edgeList, canvas, context);
   }, [width, height, setCanvas, setContext]);
 
   return (
