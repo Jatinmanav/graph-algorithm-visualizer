@@ -47,7 +47,6 @@ const Canvas = () => {
         const y = event.clientY - rect.top;
         if (context) {
           const nodeCount: number = getNextIndex(nodeList);
-          console.log(nodeCount);
           drawNode(nodeCount, context, x, y);
           const newNode: node = createNode(
             nodeCount,
@@ -59,7 +58,6 @@ const Canvas = () => {
             rect.bottom
           );
           addNode(newNode);
-          console.log(newNode);
           console.log(nodeList);
         }
       }
@@ -82,7 +80,7 @@ const Canvas = () => {
       canvas.height = window.innerHeight;
     }
     redrawCanvas(nodeList, edgeList, canvas, context);
-  }, [width, height, setCanvas, setContext]);
+  }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
   return (
     <div className="canvas-container">

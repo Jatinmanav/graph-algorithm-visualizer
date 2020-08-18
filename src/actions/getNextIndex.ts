@@ -2,7 +2,6 @@ import node from "../types/node";
 
 const getNextIndex = (nodeList: node[]) => {
   let index = 0;
-  console.log(nodeList.length);
   if (nodeList.length > 0) {
     index = nodeList.slice(-1)[0].count + 1;
   }

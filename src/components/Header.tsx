@@ -41,24 +41,11 @@ const Header = () => {
     if (context && canvas) {
       const sourceNum = +source;
       const targetNum = +target;
-      drawEdge(nodeList, sourceNum, targetNum, context);
       const newEdge: edge = {
         source: nodeList[sourceNum],
         target: nodeList[targetNum],
       };
       addEdge(newEdge);
-      drawNode(
-        sourceNum,
-        context,
-        nodeList[sourceNum].canvasX,
-        nodeList[sourceNum].canvasY
-      );
-      drawNode(
-        targetNum,
-        context,
-        nodeList[targetNum].canvasX,
-        nodeList[targetNum].canvasY
-      );
     }
   };
 
