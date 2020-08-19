@@ -8,6 +8,7 @@ const initialState: adjacencyListProvider = {
   edgeList: [],
   addNode: (node: node) => {},
   addEdge: (edge: edge) => {},
+  moveNode: (index: node) => {},
   deleteNode: (x: number, y: number) => {},
   clearNodes: () => {},
 };
@@ -30,6 +31,17 @@ export const AdjacencyListContextProvider = (props: IProps) => {
 
   const addEdge = (edge: edge) => {
     setEdgeList([...edgeList, edge]);
+  };
+
+  const moveNode = (node: node) => {
+    const count = node.count;
+    const temp = nodeList;
+    for (let iter in temp) {
+      if (temp[iter].count === count) {
+        temp[iter] = node;
+      }
+    }
+    setNodeList(temp);
   };
 
   const deleteNode = (x: number, y: number) => {
@@ -60,7 +72,15 @@ export const AdjacencyListContextProvider = (props: IProps) => {
 
   return (
     <AdjacencyListContext.Provider
-      value={{ nodeList, edgeList, addNode, addEdge, clearNodes, deleteNode }}
+      value={{
+        nodeList,
+        edgeList,
+        addNode,
+        addEdge,
+        clearNodes,
+        moveNode,
+        deleteNode,
+      }}
     >
       {props.children}
     </AdjacencyListContext.Provider>

@@ -6,6 +6,7 @@ export default interface adjacencyListProvider {
   edgeList: edge[];
   addNode: (node: node) => void;
   addEdge: (edge: edge) => void;
+  moveNode: (index: node) => void;
   deleteNode: (x: number, y: number) => void;
   clearNodes: () => void;
 }

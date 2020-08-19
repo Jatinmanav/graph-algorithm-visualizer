@@ -14,15 +14,15 @@ import redrawCanvas from "../actions/redrawCanvas";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
-  const [mousedown, setMousedown] = useState<boolean>(false);
+  const [newnode, setNewnode] = useState<node | null>(null);
   const [contextmenu, setContextMenu] = useState<contextMenu>(
     initialContextMenu
   );
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useWindowSize();
-  const { nodeList, edgeList, addNode } = useContext<adjacencyListProvider>(
-    AdjacencyListContext
-  );
+  const { nodeList, edgeList, moveNode, addNode } = useContext<
+    adjacencyListProvider
+  >(AdjacencyListContext);
   const { canvas, context, setCanvas, setContext } = useContext<canvasProvider>(
     CanvasContext
   );
@@ -51,9 +51,62 @@ const Canvas = () => {
     redrawCanvas(nodeList, edgeList, canvas, context);
   }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
-  const handleClick = (event: React.MouseEvent): void => {
-    if (contextmenu.isOpen === false) {
-      if (canvas) {
+  const handleRightClick = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    setContextMenuState(true, event.clientX, event.clientY);
+  };
+
+  const handleMouseDown = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    if (canvas && event.buttons === 1) {
+      const x = event.clientX;
+      const y = event.clientY;
+      const rect = canvas.getBoundingClientRect();
+      let index: number = -1;
+      for (let iter in nodeList) {
+        if (
+          Math.abs(x - nodeList[iter].clientX) < 20 &&
+          Math.abs(y - nodeList[iter].clientY) < 20
+        ) {
+          index = +iter;
+        }
+      }
+      if (index > -1) {
+        console.log(index);
+        let node = nodeList[index];
+        node.clientX = x;
+        node.clientY = y;
+        node.canvasX = x - rect.left;
+        node.canvasY = y - rect.top;
+        setNewnode(node);
+      }
+    }
+  };
+
+  const handleMouseMove = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    if (newnode && canvas && event.buttons === 1) {
+      const x = event.clientX;
+      const y = event.clientY;
+      let node = newnode;
+      let rect = canvas.getBoundingClientRect();
+      node.clientX = x;
+      node.clientY = y;
+      node.canvasX = x - rect.left;
+      node.canvasY = y - rect.top;
+      setNewnode(node);
+
+      moveNode(newnode);
+      redrawCanvas(nodeList, edgeList, canvas, context);
+    }
+  };
+
+  const handleMouseUp = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    if (newnode) {
+      setNewnode(null);
+    } else {
+      if (contextmenu.isOpen === false && canvas) {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
@@ -72,38 +125,15 @@ const Canvas = () => {
           addNode(newNode);
           console.log(nodeList);
         }
+      } else {
+        setContextMenuState(false);
       }
-    } else {
-      setContextMenuState(false);
     }
-  };
-
-  const handleRightClick = (event: React.MouseEvent): void => {
-    event.preventDefault();
-    setContextMenuState(true, event.pageX, event.pageY);
-  };
-
-  const handleMouseDown = (event: React.MouseEvent): void => {
-    event.preventDefault();
-    setMousedown(true);
-    console.log(event.clientX, event.clientY);
-  };
-
-  const handleMouseMove = (event: React.MouseEvent): void => {
-    event.preventDefault();
-    if (mousedown) {
-      console.log(event.clientX, event.clientY);
-    }
-  };
-
-  const handleMouseUp = (event: React.MouseEvent): void => {
-    event.preventDefault();
-    setMousedown(false);
   };
 
   const handleMouseOut = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setMousedown(false);
+    setNewnode(null);
   };
 
   return (
@@ -118,7 +148,6 @@ const Canvas = () => {
       )}
       <canvas
         ref={canvasRef}
-        onClick={handleClick}
         className="canvas"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
