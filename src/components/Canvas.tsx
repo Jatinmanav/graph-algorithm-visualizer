@@ -14,6 +14,7 @@ import redrawCanvas from "../actions/redrawCanvas";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
+  const [mousedown, setMousedown] = useState<boolean>(false);
   const [contextmenu, setContextMenu] = useState<contextMenu>(
     initialContextMenu
   );
@@ -38,6 +39,17 @@ const Canvas = () => {
     };
     setContextMenu(newContextMenuState);
   };
+
+  useEffect(() => {
+    let canvas = canvasRef.current;
+    if (canvas) {
+      setCanvas(canvas);
+      setContext(canvas.getContext("2d"));
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    redrawCanvas(nodeList, edgeList, canvas, context);
+  }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
   const handleClick = (event: React.MouseEvent): void => {
     if (contextmenu.isOpen === false) {
@@ -71,16 +83,28 @@ const Canvas = () => {
     setContextMenuState(true, event.pageX, event.pageY);
   };
 
-  useEffect(() => {
-    let canvas = canvasRef.current;
-    if (canvas) {
-      setCanvas(canvas);
-      setContext(canvas.getContext("2d"));
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+  const handleMouseDown = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    setMousedown(true);
+    console.log(event.clientX, event.clientY);
+  };
+
+  const handleMouseMove = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    if (mousedown) {
+      console.log(event.clientX, event.clientY);
     }
-    redrawCanvas(nodeList, edgeList, canvas, context);
-  }, [width, height, nodeList, edgeList, setCanvas, setContext]);
+  };
+
+  const handleMouseUp = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    setMousedown(false);
+  };
+
+  const handleMouseOut = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    setMousedown(false);
+  };
 
   return (
     <div className="canvas-container">
@@ -96,6 +120,10 @@ const Canvas = () => {
         ref={canvasRef}
         onClick={handleClick}
         className="canvas"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseOut={handleMouseOut}
         onContextMenu={handleRightClick}
       />
     </div>
