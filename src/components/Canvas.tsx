@@ -48,7 +48,7 @@ const Canvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    redrawCanvas(nodeList, edgeList, canvas, context);
+    redrawCanvas(nodeList, edgeList, canvas, context, moveNode);
   }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
   const handleRightClick = (event: React.MouseEvent): void => {
@@ -97,7 +97,7 @@ const Canvas = () => {
       setNewnode(node);
 
       moveNode(newnode);
-      redrawCanvas(nodeList, edgeList, canvas, context);
+      redrawCanvas(nodeList, edgeList, canvas, context, moveNode);
     }
   };
 

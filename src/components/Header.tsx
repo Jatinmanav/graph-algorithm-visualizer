@@ -34,7 +34,33 @@ const Header = () => {
     setTarget((event.target as HTMLSelectElement).value);
   };
 
-  const handleNewEdge = (event: React.FormEvent<HTMLButtonElement>) => {
+  const handleNewDirectedEdge = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (context && canvas) {
+      let sourceNum: number = +source;
+      let targetNum: number = +target;
+      let sourceNode: node | null = null;
+      let targetNode: node | null = null;
+      for (let itr of nodeList) {
+        if (itr.count === sourceNum) {
+          sourceNode = itr;
+        } else if (itr.count === targetNum) {
+          targetNode = itr;
+        }
+      }
+      if (sourceNode && targetNode) {
+        const newEdge: edge = {
+          source: sourceNode,
+          target: targetNode,
+        };
+        addEdge(newEdge);
+      }
+    }
+  };
+
+  const handleNewUndirectedEdge = (
+    event: React.FormEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
     if (context && canvas) {
       let sourceNum: number = +source;
@@ -107,8 +133,11 @@ const Header = () => {
           }
         })}
       </select>
-      <button className="add-edge" onClick={handleNewEdge}>
-        Add Edge
+      <button className="add-edge" onClick={handleNewDirectedEdge}>
+        Add Directed Edge
+      </button>
+      <button className="add-edge" onClick={handleNewUndirectedEdge}>
+        Add Undirected Edge
       </button>
       <button className="clear-canvas" onClick={handleClearCanvas}>
         Clear Canvas
