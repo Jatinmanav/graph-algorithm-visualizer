@@ -49,6 +49,7 @@ const Canvas = () => {
       canvas.height = window.innerHeight;
     }
     redrawCanvas(nodeList, edgeList, canvas, context, moveNode);
+    //eslint-disable-next-line
   }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
   const handleRightClick = (event: React.MouseEvent): void => {

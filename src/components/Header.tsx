@@ -9,11 +9,8 @@ import edge from "../types/edge";
 const Header = () => {
   const [source, setSource] = useState<string>("");
   const [target, setTarget] = useState<string>("");
-  const { nodeList, edgeList, addNode, addEdge, clearNodes } = useContext(
-    AdjacencyListContext
-  );
+  const { nodeList, addEdge, clearNodes } = useContext(AdjacencyListContext);
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  let newNode: node = nodeList[0];
 
   const handleThemeChange = (value: boolean): void => {
     console.log("test");
