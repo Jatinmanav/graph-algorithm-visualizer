@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
+import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import { CanvasContext } from "../contexts/CanvasContext";
 import "../styles/Header.scss";
 import node from "../types/node";
-import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
-import canvasProvider from "../types/canvasProvider";
-import { CanvasContext } from "../contexts/CanvasContext";
 import edge from "../types/edge";
+import canvasProvider from "../types/canvasProvider";
 
 const Header = () => {
   const [source, setSource] = useState<string>("");

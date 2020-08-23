@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import { CanvasContext } from "../contexts/CanvasContext";
 import useWindowSize from "../hooks/windowSize";
 import node from "../types/node";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import contextMenu from "../types/contextMenu";
-import createNode from "../actions/createNode";
-import drawNode from "../actions/drawNode";
-import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
-import { CanvasContext } from "../contexts/CanvasContext";
-import Contextmenu from "../components/Contextmenu";
 import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
+import createNode from "../actions/createNode";
+import drawNode from "../actions/drawNode";
+import Contextmenu from "../components/Contextmenu";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
