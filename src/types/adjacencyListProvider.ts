@@ -4,6 +4,7 @@ import edge from "../types/edge";
 export default interface adjacencyListProvider {
   nodeList: node[];
   edgeList: edge[];
+  adjacencyList: number[][];
   addNode: (node: node) => void;
   addEdge: (edge: edge) => void;
   moveNode: (index: node) => void;

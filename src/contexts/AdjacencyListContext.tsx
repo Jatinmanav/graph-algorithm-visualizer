@@ -6,6 +6,7 @@ import adjacencyListProvider from "../types/adjacencyListProvider";
 const initialState: adjacencyListProvider = {
   nodeList: [],
   edgeList: [],
+  adjacencyList: [[]],
   addNode: (node: node) => {},
   addEdge: (edge: edge) => {},
   moveNode: (index: node) => {},
@@ -24,13 +25,21 @@ type IProps = {
 export const AdjacencyListContextProvider = (props: IProps) => {
   const [nodeList, setNodeList] = useState<node[]>([]);
   const [edgeList, setEdgeList] = useState<edge[]>([]);
+  const [adjacencyList, setAdjacencyList] = useState<number[][]>([[]]);
 
   const addNode = (node: node) => {
+    let tempAdjacencyList = adjacencyList;
+    tempAdjacencyList.push([]);
     setNodeList([...nodeList, node]);
+    setAdjacencyList(adjacencyList);
   };
 
   const addEdge = (edge: edge) => {
+    let tempAdjacencyList = adjacencyList;
+    tempAdjacencyList[edge.source.count].push(edge.target.count);
     setEdgeList([...edgeList, edge]);
+    setAdjacencyList(tempAdjacencyList);
+    console.log(adjacencyList);
   };
 
   const moveNode = (node: node) => {
@@ -75,6 +84,7 @@ export const AdjacencyListContextProvider = (props: IProps) => {
       value={{
         nodeList,
         edgeList,
+        adjacencyList,
         addNode,
         addEdge,
         clearNodes,
