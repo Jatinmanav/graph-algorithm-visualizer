@@ -1,10 +1,11 @@
 import node from "../types/node";
 import edge from "../types/edge";
+import adjacencyListObject from "./adjacencyListObject";
 
 export default interface adjacencyListProvider {
   nodeList: node[];
   edgeList: edge[];
-  adjacencyList: number[][];
+  adjacencyList: adjacencyListObject[];
   addNode: (node: node) => void;
   addEdge: (edge: edge) => void;
   moveNode: (index: node) => void;

@@ -2,11 +2,12 @@ import React, { createContext, useState, ReactNode } from "react";
 import node from "../types/node";
 import edge from "../types/edge";
 import adjacencyListProvider from "../types/adjacencyListProvider";
+import adjacencyListObject from "../types/adjacencyListObject";
 
 const initialState: adjacencyListProvider = {
   nodeList: [],
   edgeList: [],
-  adjacencyList: [[]],
+  adjacencyList: [],
   addNode: (node: node) => {},
   addEdge: (edge: edge) => {},
   moveNode: (index: node) => {},
@@ -25,18 +26,22 @@ type IProps = {
 export const AdjacencyListContextProvider = (props: IProps) => {
   const [nodeList, setNodeList] = useState<node[]>([]);
   const [edgeList, setEdgeList] = useState<edge[]>([]);
-  const [adjacencyList, setAdjacencyList] = useState<number[][]>([[]]);
+  const [adjacencyList, setAdjacencyList] = useState<adjacencyListObject[]>([]);
 
   const addNode = (node: node) => {
     let tempAdjacencyList = adjacencyList;
-    tempAdjacencyList.push([]);
+    tempAdjacencyList.push({ count: node.count, target: [] });
     setNodeList([...nodeList, node]);
     setAdjacencyList(adjacencyList);
   };
 
   const addEdge = (edge: edge) => {
     let tempAdjacencyList = adjacencyList;
-    tempAdjacencyList[edge.source.count].push(edge.target.count);
+    for (let item of tempAdjacencyList) {
+      if (item.count === edge.source.count) {
+        item.target.push(edge.target.count);
+      }
+    }
     setEdgeList([...edgeList, edge]);
     setAdjacencyList(tempAdjacencyList);
     console.log(adjacencyList);
@@ -68,15 +73,25 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     const temp = nodeList.filter((item) => {
       return item.count !== index;
     });
+    let tempAdjacencyList = adjacencyList;
+    tempAdjacencyList.splice(index, 1);
+    for (let item of tempAdjacencyList) {
+      let count = item.target.length;
+      while (count--) {
+        if (item.target[count] === index) {
+          item.target.splice(count, 1);
+        }
+      }
+    }
 
-    console.log("spliced");
+    setAdjacencyList(tempAdjacencyList);
     setNodeList(temp);
-    console.log(edgeList);
   };
 
   const clearNodes = () => {
     setNodeList([]);
     setEdgeList([]);
+    setAdjacencyList([]);
   };
 
   return (
