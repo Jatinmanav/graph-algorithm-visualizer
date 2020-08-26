@@ -25,10 +25,12 @@ const redrawCanvas = (
         item.windowX = rect.right;
         item.windowY = rect.bottom;
       }
-      drawNode(item.count, context, item.canvasX, item.canvasY);
     }
     for (let item of edgeList) {
       drawEdge(item.source, item.target, context);
+    }
+    for (let item of nodeList) {
+      drawNode(item.count, context, item.canvasX, item.canvasY);
     }
   }
 };

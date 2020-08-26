@@ -1,5 +1,41 @@
 import node from "../types/node";
 
+function drawArrowhead(
+  context: CanvasRenderingContext2D,
+  from: [number, number],
+  to: [number, number],
+  radius: number
+) {
+  let [x_center, y_center] = to;
+  let [fromX, fromY] = from;
+
+  let angle;
+  let x;
+  let y;
+
+  angle = Math.atan2(y_center - fromY, x_center - fromX);
+  x = x_center;
+  y = y_center;
+
+  context.moveTo(x, y);
+
+  angle += (1.0 / 3.0) * (2 * Math.PI);
+  x = radius * Math.cos(angle) + x_center;
+  y = radius * Math.sin(angle) + y_center;
+
+  context.lineTo(x, y);
+
+  angle += (1.0 / 3.0) * (2 * Math.PI);
+  x = radius * Math.cos(angle) + x_center;
+  y = radius * Math.sin(angle) + y_center;
+
+  context.lineTo(x, y);
+
+  context.closePath();
+
+  context.fill();
+}
+
 const drawEdge = (
   source: node,
   target: node,
@@ -9,27 +45,17 @@ const drawEdge = (
   let sourceY = source.canvasY;
   let targetX = target.canvasX;
   let targetY = target.canvasY;
-  const theta = Math.atan((targetY - sourceY) / (targetX - sourceX));
-  console.log(theta);
-  if (
-    (targetY - sourceY > 0 && targetX - sourceX > 0) ||
-    (targetY - sourceY < 0 && targetX - sourceX > 0)
-  ) {
-    targetX = targetX - 20 * Math.cos(theta);
-    targetY = targetY - 20 * Math.sin(theta);
-    sourceX = sourceX + 20 * Math.cos(theta);
-    sourceY = sourceY + 20 * Math.sin(theta);
-  } else {
-    targetX = targetX + 20 * Math.cos(theta);
-    targetY = targetY + 20 * Math.sin(theta);
-    sourceX = sourceX - 20 * Math.cos(theta);
-    sourceY = sourceY - 20 * Math.sin(theta);
-  }
+  const theta = Math.atan2(targetY - sourceY, targetX - sourceX);
+  targetX = targetX - 20 * Math.cos(theta);
+  targetY = targetY - 20 * Math.sin(theta);
+  sourceX = sourceX + 20 * Math.cos(theta);
+  sourceY = sourceY + 20 * Math.sin(theta);
   context.lineWidth = 3;
   context.beginPath();
   context.moveTo(sourceX, sourceY);
   context.lineTo(targetX, targetY);
   context.stroke();
+  drawArrowhead(context, [sourceX, sourceY], [targetX, targetY], 15);
 };
 
 export default drawEdge;
