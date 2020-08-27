@@ -1,10 +1,11 @@
 import node from "../types/node";
 import edge from "../types/edge";
 
-const createEdge = (nodeOne: node, nodeTwo: node): edge => {
+const createEdge = (nodeOne: node, nodeTwo: node, directed: boolean): edge => {
   const newEdge: edge = {
     source: nodeOne,
     target: nodeTwo,
+    directed: directed,
   };
   return newEdge;
 };

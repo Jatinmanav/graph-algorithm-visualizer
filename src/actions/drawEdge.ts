@@ -39,6 +39,7 @@ function drawArrowhead(
 const drawEdge = (
   source: node,
   target: node,
+  directed: boolean,
   context: CanvasRenderingContext2D
 ): void => {
   let sourceX = source.canvasX;
@@ -55,7 +56,9 @@ const drawEdge = (
   context.moveTo(sourceX, sourceY);
   context.lineTo(targetX, targetY);
   context.stroke();
-  drawArrowhead(context, [sourceX, sourceY], [targetX, targetY], 15);
+  if (directed) {
+    drawArrowhead(context, [sourceX, sourceY], [targetX, targetY], 15);
+  }
 };
 
 export default drawEdge;

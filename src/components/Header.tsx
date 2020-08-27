@@ -49,6 +49,7 @@ const Header = () => {
         const newEdge: edge = {
           source: sourceNode,
           target: targetNode,
+          directed: true,
         };
         addEdge(newEdge);
       }
@@ -75,6 +76,7 @@ const Header = () => {
         const newEdge: edge = {
           source: sourceNode,
           target: targetNode,
+          directed: false,
         };
         addEdge(newEdge);
       }
