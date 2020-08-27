@@ -7,8 +7,7 @@ const redrawCanvas = (
   nodeList: node[],
   edgeList: edge[],
   canvas: HTMLCanvasElement | null,
-  context: CanvasRenderingContext2D | null,
-  moveNode: (index: node) => void
+  context: CanvasRenderingContext2D | null
 ) => {
   if (canvas && context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -30,7 +29,7 @@ const redrawCanvas = (
       drawEdge(item.source, item.target, item.directed, context);
     }
     for (let item of nodeList) {
-      drawNode(item.count, context, item.canvasX, item.canvasY);
+      drawNode(item.count, context, item.canvasX, item.canvasY, "#ffffff");
     }
   }
 };

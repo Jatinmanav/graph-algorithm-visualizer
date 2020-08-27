@@ -20,14 +20,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  const {
-    nodeList,
-    edgeList,
-    addNode,
-    clearNodes,
-    deleteNode,
-    moveNode,
-  } = useContext<adjacencyListProvider>(AdjacencyListContext);
+  const { nodeList, edgeList, addNode, clearNodes, deleteNode } = useContext<
+    adjacencyListProvider
+  >(AdjacencyListContext);
 
   let innerX = x;
   let innerY = y;
@@ -53,7 +48,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
       const yPos = y - rect.top;
       if (context) {
         const nodeCount: number = getNextIndex(nodeList);
-        drawNode(nodeCount, context, xPos, yPos);
+        drawNode(nodeCount, context, xPos, yPos, "#ffffff");
         const newNode: node = createNode(
           nodeCount,
           xPos,
@@ -98,7 +93,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const handleDeleteNode = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
     deleteNode(x, y);
-    redrawCanvas(nodeList, edgeList, canvas, context, moveNode);
+    redrawCanvas(nodeList, edgeList, canvas, context);
     setContextMenuState(false);
   };
 

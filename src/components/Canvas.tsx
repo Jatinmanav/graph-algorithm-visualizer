@@ -48,7 +48,7 @@ const Canvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    redrawCanvas(nodeList, edgeList, canvas, context, moveNode);
+    redrawCanvas(nodeList, edgeList, canvas, context);
     //eslint-disable-next-line
   }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
@@ -98,7 +98,7 @@ const Canvas = () => {
       setNewnode(node);
 
       moveNode(newnode);
-      redrawCanvas(nodeList, edgeList, canvas, context, moveNode);
+      redrawCanvas(nodeList, edgeList, canvas, context);
     }
   };
 
@@ -113,7 +113,7 @@ const Canvas = () => {
         const y = event.clientY - rect.top;
         if (context) {
           const nodeCount: number = getNextIndex(nodeList);
-          drawNode(nodeCount, context, x, y);
+          drawNode(nodeCount, context, x, y, "#ffffff");
           const newNode: node = createNode(
             nodeCount,
             x,
