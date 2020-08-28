@@ -4,6 +4,7 @@ import { CanvasContextProvider } from "./contexts/CanvasContext";
 import "./styles/App.scss";
 import Header from "./components/Header";
 import Canvas from "./components/Canvas";
+import Visualize from "./components/Visualize";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
           <Header />
           <div className="container">
             <Canvas />
+            <Visualize />
           </div>
         </CanvasContextProvider>
       </AdjacencyListContextProvider>

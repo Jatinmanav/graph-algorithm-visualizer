@@ -1,0 +1,42 @@
+.visualize-container {
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-width: 200px;
+  width: 25vw;
+  height: 10vh;
+  position: absolute;
+  background-color: red;
+}
+
+.visualize-button {
+  margin: auto;
+  max-width: 100%;
+  line-height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1em;
+  border: black 4px solid;
+  border-top: none;
+  background-color: red;
+  cursor: pointer;
+}
+
+.visualize-button:hover {
+  border: black 4px solid;
+  border-top: none;
+  background-color: blue;
+}
+
+.visualize-select {
+  margin: auto;
+  padding: 1em;
+  width: 100%;
+  border: black 4px solid;
+  border-bottom: none;
+}
+
+.visualize-select:focus {
+  outline: none;
+}

@@ -1,5 +1,7 @@
+import adjacencyListObject from "../types/adjacencyListObject";
+
 const dfs = (
-  adjacencyList: number[][],
+  adjacencyList: adjacencyListObject[],
   index: number,
   visited: Set<number>,
   tempVisited: Set<number>,
@@ -7,10 +9,10 @@ const dfs = (
 ): boolean => {
   visited.add(index);
   tempVisited.add(index);
-  if (adjacencyList[index].length === 0) {
+  if (adjacencyList[index].target.length === 0) {
     tempVisited.clear();
   }
-  for (let item of adjacencyList[index]) {
+  for (let item of adjacencyList[index].target) {
     if (tempVisited.has(item) === true) {
       return false;
     }
@@ -31,15 +33,15 @@ const dfs = (
   return true;
 };
 
-const topologicalSort = (adjacencyList: number[][]): number[] => {
+const topologicalSort = (adjacencyList: adjacencyListObject[]): number[] => {
   let result: number[] = [];
   let visited = new Set<number>();
-  for (let item in adjacencyList) {
+  for (let item of adjacencyList) {
     let tempVisited = new Set<number>();
-    if (visited.has(+item) === false) {
+    if (visited.has(item.count) === false) {
       let value: boolean = dfs(
         adjacencyList,
-        +item,
+        item.count,
         visited,
         tempVisited,
         result

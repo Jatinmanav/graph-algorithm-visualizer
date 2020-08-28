@@ -3,6 +3,7 @@ import node from "../types/node";
 import edge from "../types/edge";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import adjacencyListObject from "../types/adjacencyListObject";
+import topologicalSort from "../algorithms/topologicalSort";
 
 const initialState: adjacencyListProvider = {
   nodeList: [],
@@ -44,6 +45,7 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     }
     setEdgeList([...edgeList, edge]);
     setAdjacencyList(tempAdjacencyList);
+    console.log(topologicalSort(adjacencyList));
     console.log(adjacencyList);
   };
 
