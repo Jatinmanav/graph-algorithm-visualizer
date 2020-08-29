@@ -1,24 +1,45 @@
 import adjacencyListObject from "../types/adjacencyListObject";
+import node from "../types/node";
+
+const getIndex = (adjacencyList: adjacencyListObject[], count: number) => {
+  for (let item in adjacencyList) {
+    console.log(adjacencyList[item].count, count);
+    if (adjacencyList[+item].count - count === 0) {
+      console.log(adjacencyList[item].count, count);
+      return +item;
+    }
+  }
+  return -1;
+};
 
 const dfs = (
   adjacencyList: adjacencyListObject[],
-  index: number,
+  nodeList: node[],
+  count: number,
   visited: Set<number>,
   tempVisited: Set<number>,
   result: number[]
 ): boolean => {
-  visited.add(index);
-  tempVisited.add(index);
+  const index = getIndex(adjacencyList, count);
+  console.log(index);
+  console.log(adjacencyList);
+  visited.add(count);
+  tempVisited.add(count);
   if (adjacencyList[index].target.length === 0) {
     tempVisited.clear();
   }
   for (let item of adjacencyList[index].target) {
     if (tempVisited.has(item) === true) {
+      console.log(adjacencyList[index]);
+      console.log(tempVisited);
+      console.log(item);
       return false;
     }
     if (visited.has(item) === false) {
+      console.log(item);
       let value: boolean = dfs(
         adjacencyList,
+        nodeList,
         item,
         visited,
         tempVisited,
@@ -29,18 +50,23 @@ const dfs = (
       }
     }
   }
-  result.push(index);
+  result.push(count);
   return true;
 };
 
-const topologicalSort = (adjacencyList: adjacencyListObject[]): number[] => {
+const topologicalSort = (
+  adjacencyList: adjacencyListObject[],
+  nodeList: node[]
+): number[] => {
   let result: number[] = [];
   let visited = new Set<number>();
-  for (let item of adjacencyList) {
+  for (let iter in adjacencyList) {
+    const item = adjacencyList[+iter];
     let tempVisited = new Set<number>();
     if (visited.has(item.count) === false) {
       let value: boolean = dfs(
         adjacencyList,
+        nodeList,
         item.count,
         visited,
         tempVisited,
@@ -52,6 +78,7 @@ const topologicalSort = (adjacencyList: adjacencyListObject[]): number[] => {
       }
     }
   }
+  console.log(result);
   return result;
 };
 

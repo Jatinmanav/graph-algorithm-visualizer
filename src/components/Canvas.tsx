@@ -32,6 +32,7 @@ const Canvas = () => {
     x: number = 0,
     y: number = 0
   ): void => {
+    console.log(state);
     const newContextMenuState: contextMenu = {
       isOpen: state,
       x: x,
@@ -127,6 +128,7 @@ const Canvas = () => {
           console.log(nodeList);
         }
       } else {
+        console.log("here");
         setContextMenuState(false);
       }
     }
