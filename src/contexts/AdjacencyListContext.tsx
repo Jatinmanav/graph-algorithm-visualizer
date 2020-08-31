@@ -74,7 +74,12 @@ export const AdjacencyListContextProvider = (props: IProps) => {
       return item.count !== index;
     });
     let tempAdjacencyList = adjacencyList;
-    tempAdjacencyList.splice(index, 1);
+    let count = tempAdjacencyList.length;
+    while (count--) {
+      if (tempAdjacencyList[count].count === index) {
+        tempAdjacencyList.splice(count, 1);
+      }
+    }
     for (let item of tempAdjacencyList) {
       let count = item.target.length;
       while (count--) {
