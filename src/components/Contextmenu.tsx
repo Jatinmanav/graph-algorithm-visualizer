@@ -111,19 +111,28 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
           <div className="context-menu-option" onClick={handleClearCanvas}>
             Clear Canvas
           </div>
-          <div className="context-menu-option" onClick={handleAddDirectedEdge}>
-            Add Direceted Edge
-          </div>
-          <div
-            className="context-menu-option"
-            onClick={handleAddUndirectedEdge}
-          >
-            Add Undirected Edge
-          </div>
         </div>
       ) : (
-        <div className="context-menu-option" onClick={handleDeleteNode}>
-          Delete Node
+        <div>
+          <div className="context-menu-option" onClick={handleDeleteNode}>
+            Delete Node
+          </div>
+          <div
+            className="context-menu-option context-menu-arrow"
+            onClick={handleAddDirectedEdge}
+          >
+            <span className="context-menu-arrow-text">Add Direceted Edge</span>
+            <span className="context-menu-arrow-head">&#129170;</span>
+          </div>
+          <div
+            className="context-menu-option context-menu-arrow"
+            onClick={handleAddUndirectedEdge}
+          >
+            <span className="context-menu-arrow-text context-menu-arrow">
+              Add Undireceted Edge
+            </span>
+            <span className="context-menu-arrow-head">&#129170;</span>
+          </div>
         </div>
       )}
     </div>
