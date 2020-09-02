@@ -55,7 +55,6 @@ const Canvas = () => {
 
   const handleRightClick = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setContextMenuState(true, event.clientX, event.clientY);
   };
 
   const handleMouseDown = (event: React.MouseEvent): void => {
@@ -82,6 +81,9 @@ const Canvas = () => {
         node.canvasY = y - rect.top;
         setNewnode(node);
       }
+    }
+    if (event.buttons === 2) {
+      setContextMenuState(true, event.clientX, event.clientY);
     }
   };
 
