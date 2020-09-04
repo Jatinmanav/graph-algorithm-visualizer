@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { CanvasContext } from "../contexts/CanvasContext";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import node from "../types/node";
@@ -18,8 +18,7 @@ type AppProps = {
 
 type DropdownMenu = {
   isOpen: boolean;
-  x?: number;
-  y?: number;
+  directed?: boolean;
 };
 
 type position = {
@@ -27,11 +26,19 @@ type position = {
   y: number;
 };
 
+type positionTwo = {
+  x: number;
+  y1: number;
+  y2: number;
+};
+
 const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const [newedge, setNewedge] = useState<DropdownMenu>({ isOpen: false });
   const [pos, setPos] = useState<position>({ x: 0, y: 0 });
+  const [divpos, setDivpos] = useState<positionTwo>({ x: 0, y1: 0, y2: 0 });
   const [index, setIndex] = useState<number>(-1);
   const [result, setResult] = useState<boolean>(true);
+  const divElement = useRef<HTMLDivElement>(null);
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
@@ -42,6 +49,10 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   useEffect(() => {
     let innerX = x;
     let innerY = y;
+    if (divElement.current != null) {
+      const rect = divElement.current.getBoundingClientRect();
+      setDivpos({ x: rect.right, y1: rect.top, y2: rect.bottom });
+    }
     if (x + 200 > window.innerWidth) {
       innerX = x - 200;
     }
@@ -65,10 +76,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
 
   const setNewEdgeWrapper = (
     isOpen: boolean,
-    x: number = 0,
-    y: number = 0
+    directed: boolean = true
   ): void => {
-    const newEdge = { isOpen: isOpen, x: x, y: y };
+    const newEdge = { isOpen: isOpen, directed: directed };
     setNewedge(newEdge);
   };
 
@@ -133,22 +143,49 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
     setContextMenuState(false);
   };
 
-  const handleMouseIn = (event: React.MouseEvent): void => {
+  const handleMouseInDirected = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setNewEdgeWrapper(true);
+    setNewEdgeWrapper(true, true);
   };
+
+  const handleMouseInUndirected = (event: React.MouseEvent): void => {
+    event.preventDefault();
+    setNewEdgeWrapper(true, false);
+  };
+
   const handleMouseOut = (event: React.MouseEvent): void => {
     event.preventDefault();
     setNewEdgeWrapper(false);
   };
 
   return (
-    <div>
+    <div className="context-menu-container" onMouseLeave={handleMouseOut}>
       {newedge.isOpen ? (
-        <div className="context-menu" style={{ position: "absolute" }}>
+        <div
+          className="context-menu"
+          style={{
+            left: divpos.x,
+            top: newedge.directed ? divpos.y1 : divpos.y2,
+            position: "absolute",
+          }}
+        >
           {nodeList.map((value: node) => {
-            console.log(index);
-            return value.count === index ? <div>JS</div> : <div>Hello</div>;
+            if (value.count !== index) {
+              return (
+                <div
+                  key={value.count}
+                  onClick={
+                    newedge.directed
+                      ? handleAddDirectedEdge
+                      : handleAddUndirectedEdge
+                  }
+                  className="context-menu-option"
+                >
+                  {value.count}
+                </div>
+              );
+            }
+            return null;
           })}
         </div>
       ) : (
@@ -175,9 +212,9 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             </div>
             <div
               className="context-menu-option context-menu-arrow"
+              ref={divElement}
               onClick={handleAddDirectedEdge}
-              onMouseEnter={handleMouseIn}
-              onMouseLeave={handleMouseOut}
+              onMouseEnter={handleMouseInDirected}
             >
               <span className="context-menu-arrow-text">
                 Add Direceted Edge
@@ -187,8 +224,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             <div
               className="context-menu-option context-menu-arrow"
               onClick={handleAddUndirectedEdge}
-              onMouseEnter={handleMouseIn}
-              onMouseLeave={handleMouseOut}
+              onMouseEnter={handleMouseInUndirected}
             >
               <span className="context-menu-arrow-text context-menu-arrow">
                 Add Undireceted Edge
