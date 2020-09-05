@@ -10,6 +10,7 @@ import createNode from "../actions/createNode";
 import contextMenuState from "../actions/contextMenuState";
 import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
+import Newedge from "./Newedge";
 
 type AppProps = {
   contextmenu: contextMenu;
@@ -120,22 +121,6 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
     setContextMenuState(false);
   };
 
-  const handleAddDirectedEdge = (
-    event: React.FormEvent<HTMLDivElement>
-  ): void => {
-    event.preventDefault();
-    console.log("Add Directed Edge");
-    setContextMenuState(false);
-  };
-
-  const handleAddUndirectedEdge = (
-    event: React.FormEvent<HTMLDivElement>
-  ): void => {
-    event.preventDefault();
-    console.log("Add Undirected Edge");
-    setContextMenuState(false);
-  };
-
   const handleDeleteNode = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
     deleteNode(x, y);
@@ -170,19 +155,13 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
           }}
         >
           {nodeList.map((value: node) => {
-            if (value.count !== index) {
+            if (value.count !== index && newedge.directed !== undefined) {
               return (
-                <div
-                  key={value.count}
-                  onClick={
-                    newedge.directed
-                      ? handleAddDirectedEdge
-                      : handleAddUndirectedEdge
-                  }
-                  className="context-menu-option"
-                >
-                  {value.count}
-                </div>
+                <Newedge
+                  source={index}
+                  target={value.count}
+                  directed={newedge.directed}
+                />
               );
             }
             return null;
@@ -213,7 +192,6 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             <div
               className="context-menu-option context-menu-arrow"
               ref={divElement}
-              onClick={handleAddDirectedEdge}
               onMouseEnter={handleMouseInDirected}
             >
               <span className="context-menu-arrow-text">
@@ -223,7 +201,6 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             </div>
             <div
               className="context-menu-option context-menu-arrow"
-              onClick={handleAddUndirectedEdge}
               onMouseEnter={handleMouseInUndirected}
             >
               <span className="context-menu-arrow-text context-menu-arrow">
