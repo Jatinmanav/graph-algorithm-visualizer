@@ -50,15 +50,27 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   useEffect(() => {
     let innerX = x;
     let innerY = y;
-    if (divElement.current != null) {
-      const rect = divElement.current.getBoundingClientRect();
-      setDivpos({ x: rect.right, y1: rect.top, y2: rect.bottom });
-    }
     if (x + 200 > window.innerWidth) {
       innerX = x - 200;
     }
-    if (y + 170 > window.innerHeight) {
-      innerY = y - 170;
+    if (y + 150 > window.innerHeight) {
+      innerY = y - 100;
+    }
+    if (divElement.current != null) {
+      const rect = divElement.current.getBoundingClientRect();
+      let right = rect.right;
+      let top = rect.top;
+      let bottom = rect.bottom;
+      if (rect.right + 200 > window.innerWidth) {
+        right = right - 400;
+      }
+      if (rect.top + 150 > window.innerHeight) {
+        top = top - 200;
+      }
+      if (rect.bottom + 150 > window.innerHeight) {
+        bottom = bottom - 200;
+      }
+      setDivpos({ x: right, y1: top, y2: bottom });
     }
     setPos({ x: innerX, y: innerY });
     setResult(contextMenuState(nodeList, x, y));
@@ -147,7 +159,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
     <div className="context-menu-container" onMouseLeave={handleMouseOut}>
       {newedge.isOpen ? (
         <div
-          className="context-menu"
+          className="context-menu context-menu-new-edge"
           style={{
             left: divpos.x,
             top: newedge.directed ? divpos.y1 : divpos.y2,
@@ -158,6 +170,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             if (value.count !== index && newedge.directed !== undefined) {
               return (
                 <Newedge
+                  key={value.count}
                   source={index}
                   target={value.count}
                   directed={newedge.directed}

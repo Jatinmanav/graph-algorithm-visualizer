@@ -22,14 +22,19 @@
   color: var(--font-color);
   background-color: var(--background-color);
   width: 200px;
-  height: 170px;
   border: var(--background-color) 2px solid;
+}
+
+.context-menu-new-edge {
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .context-menu-option {
   border: var(--font-color) 1px solid;
   padding: 10px;
   margin-bottom: 2px;
+  height: 20px;
   cursor: pointer;
 
   &:hover {
