@@ -14,7 +14,8 @@ import Contextmenu from "../components/Contextmenu";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
-  const [newnode, setNewnode] = useState<node | null>(null);
+  const [nodetomove, setNodetomove] = useState<node | null>(null);
+  const [button, setButton] = useState<number>(0);
   const [contextmenu, setContextMenu] = useState<contextMenu>(
     initialContextMenu
   );
@@ -59,6 +60,7 @@ const Canvas = () => {
 
   const handleMouseDown = (event: React.MouseEvent): void => {
     event.preventDefault();
+    setButton(event.buttons);
     if (canvas && event.buttons === 1) {
       const x = event.clientX;
       const y = event.clientY;
@@ -79,36 +81,38 @@ const Canvas = () => {
         node.clientY = y;
         node.canvasX = x - rect.left;
         node.canvasY = y - rect.top;
-        setNewnode(node);
+        setNodetomove(node);
       }
     }
     if (event.buttons === 2) {
       setContextMenuState(true, event.clientX, event.clientY);
+      console.log("Context Menu Open");
     }
   };
 
   const handleMouseMove = (event: React.MouseEvent): void => {
     event.preventDefault();
-    if (newnode && canvas && event.buttons === 1) {
+    if (nodetomove && canvas && event.buttons === 1) {
       const x = event.clientX;
       const y = event.clientY;
-      let node = newnode;
+      let node = nodetomove;
       let rect = canvas.getBoundingClientRect();
       node.clientX = x;
       node.clientY = y;
       node.canvasX = x - rect.left;
       node.canvasY = y - rect.top;
-      setNewnode(node);
+      setNodetomove(node);
 
-      moveNode(newnode);
+      moveNode(nodetomove);
       redrawCanvas(nodeList, edgeList, canvas, context);
     }
   };
 
   const handleMouseUp = (event: React.MouseEvent): void => {
     event.preventDefault();
-    if (newnode) {
-      setNewnode(null);
+    console.log(event.buttons);
+    if (nodetomove) {
+      setNodetomove(null);
     } else {
       if (contextmenu.isOpen === false && canvas) {
         const rect = canvas.getBoundingClientRect();
@@ -130,15 +134,16 @@ const Canvas = () => {
           console.log(nodeList);
         }
       } else {
-        console.log("here");
-        setContextMenuState(false);
+        if (button === 1) {
+          setContextMenuState(false);
+        }
       }
     }
   };
 
   const handleMouseOut = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setNewnode(null);
+    setNodetomove(null);
   };
 
   return (
