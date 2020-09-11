@@ -8,6 +8,7 @@ import canvasProvider from "../types/canvasProvider";
 import node from "../types/node";
 import { CanvasContext } from "../contexts/CanvasContext";
 import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
+import depthFirstSearch from "../algorithms/depthFirstTraversal";
 
 const Visualize = () => {
   const { nodeList, edgeList, adjacencyList } = useContext<
@@ -23,6 +24,8 @@ const Visualize = () => {
       result = topologicalSort(adjacencyList, nodeList);
     } else if (algorithm === 2) {
       result = breadthFirstTraversal(adjacencyList);
+    } else if (algorithm === 3) {
+      result = depthFirstSearch(adjacencyList);
     }
     let resultNodes: node[] = [];
     for (let item of result) {
@@ -53,6 +56,9 @@ const Visualize = () => {
         </option>
         <option className="visualize-option" value={2}>
           Breadth First Traversal
+        </option>
+        <option className="visualize-option" value={3}>
+          Depth First Traversal
         </option>
         {/* <option className="visualize-option"></option>
         <option className="visualize-option"></option>
