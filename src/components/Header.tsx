@@ -103,7 +103,7 @@ const Header = () => {
       <select
         value={source}
         onChange={handleSourceChange}
-        className="source-node"
+        className="source-node dropdown"
       >
         {nodeList.map((node) => {
           return (
@@ -117,7 +117,7 @@ const Header = () => {
       <select
         value={target}
         onChange={handleTargetChange}
-        className="target-node"
+        className="target-node dropdown"
       >
         {nodeList.map((node: node) => {
           if (node.count.toString() !== source) {
@@ -132,13 +132,22 @@ const Header = () => {
           }
         })}
       </select>
-      <button className="add-edge" onClick={handleNewDirectedEdge}>
+      <button
+        className="add-edge-one header-button"
+        onClick={handleNewDirectedEdge}
+      >
         Add Directed Edge
       </button>
-      <button className="add-edge" onClick={handleNewUndirectedEdge}>
+      <button
+        className="add-edge-two header-button"
+        onClick={handleNewUndirectedEdge}
+      >
         Add Undirected Edge
       </button>
-      <button className="clear-canvas" onClick={handleClearCanvas}>
+      <button
+        className="clear-canvas header-button"
+        onClick={handleClearCanvas}
+      >
         Clear Canvas
       </button>
       <div className="toggle-container">
