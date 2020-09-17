@@ -5,10 +5,11 @@ import "../styles/Header.scss";
 import node from "../types/node";
 import edge from "../types/edge";
 import canvasProvider from "../types/canvasProvider";
+import Dropdown from "./Dropdown";
 
 const Header = () => {
-  const [source, setSource] = useState<string>("");
-  const [target, setTarget] = useState<string>("");
+  const [source, setSource] = useState<number>(0);
+  const [target, setTarget] = useState<number>(0);
   const { nodeList, addEdge, clearNodes } = useContext(AdjacencyListContext);
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
 
@@ -23,19 +24,19 @@ const Header = () => {
     }
   };
 
-  const handleSourceChange = (event: React.FormEvent<HTMLSelectElement>) => {
-    setSource((event.target as HTMLSelectElement).value);
-  };
+  // const handleSourceChange = (event: React.FormEvent<HTMLSelectElement>) => {
+  //   setSource((event.target as HTMLSelectElement).value);
+  // };
 
-  const handleTargetChange = (event: React.FormEvent<HTMLSelectElement>) => {
-    setTarget((event.target as HTMLSelectElement).value);
-  };
+  // const handleTargetChange = (event: React.FormEvent<HTMLSelectElement>) => {
+  //   setTarget((event.target as HTMLSelectElement).value);
+  // };
 
   const handleNewDirectedEdge = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (context && canvas) {
-      let sourceNum: number = +source;
-      let targetNum: number = +target;
+      let sourceNum: number = source;
+      let targetNum: number = target;
       let sourceNode: node | null = null;
       let targetNode: node | null = null;
       for (let itr of nodeList) {
@@ -61,8 +62,8 @@ const Header = () => {
   ) => {
     event.preventDefault();
     if (context && canvas) {
-      let sourceNum: number = +source;
-      let targetNum: number = +target;
+      let sourceNum: number = source;
+      let targetNum: number = target;
       let sourceNode: node | null = null;
       let targetNode: node | null = null;
       for (let itr of nodeList) {
@@ -100,7 +101,9 @@ const Header = () => {
 
   return (
     <header className="navbar">
-      <select
+      <Dropdown nodeList={nodeList} count={source} setNode={setSource} />
+      <Dropdown nodeList={nodeList} count={target} setNode={setTarget} />
+      {/* <select
         value={source}
         onChange={handleSourceChange}
         className="source-node dropdown"
@@ -131,7 +134,7 @@ const Header = () => {
             return <React.Fragment key={Math.random() * 100} />;
           }
         })}
-      </select>
+      </select> */}
       <button
         className="add-edge-one header-button"
         onClick={handleNewDirectedEdge}
