@@ -19,15 +19,15 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
     <div className="dropdown-container" onClick={handleClick}>
       <p className="dropdown-button">Node {count}</p>
       {open ? (
-        <ul className="dropdown-ul">
+        <div className="dropdown-item-container">
           {nodeList.map((item) => {
             if (item.count !== count) {
-              return <li>Hello</li>;
+              return <div className="dropdown-item">Hello</div>;
             } else {
               return <React.Fragment />;
             }
           })}
-        </ul>
+        </div>
       ) : (
         <React.Fragment />
       )}

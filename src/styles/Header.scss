@@ -35,7 +35,6 @@ $large: 1024px;
 .dropdown-container {
   background-color: red;
   border-radius: 20px;
-  padding: 1em;
   text-align: center;
 
   @media screen and (min-width: $medium) {
@@ -45,8 +44,13 @@ $large: 1024px;
 
 .dropdown-button {
   height: 100%;
-  width: 100%;
-  margin: auto;
+}
+
+.dropdown-item-container {}
+
+.dropdown-item {
+  background-color: blue;
+  list-style: none;
 }
 
 .dropdown {
