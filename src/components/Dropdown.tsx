@@ -17,7 +17,9 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
 
   return (
     <div className="dropdown-container" onClick={handleClick}>
-      <p className="dropdown-button">Node {count}</p>
+      <div className="dropdown-text">
+        <p>Node {count}</p>
+      </div>
       {open ? (
         <div className="dropdown-item-container">
           {nodeList.map((item) => {
