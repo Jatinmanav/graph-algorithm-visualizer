@@ -34,8 +34,8 @@ $large: 1024px;
 
 .dropdown-container {
   background-color: red;
-  border-radius: 20px;
   text-align: center;
+  z-index: 10;
 
   @media screen and (min-width: $medium) {
     min-width: 120px;
@@ -49,18 +49,22 @@ $large: 1024px;
   justify-content: center;
   align-content: center;
   flex-direction: column;
+
+  &:hover {
+    background-color: orange;
+    cursor: pointer;
+  }
 }
 
-.dropdown-item-container {
-}
+.dropdown-item-container {}
 
 .dropdown-item {
   background-color: blue;
+  padding: 1em;
   list-style: none;
 }
 
 .dropdown {
-  border-radius: 20px;
   appearance: none;
   padding: 1em;
 }
@@ -102,7 +106,6 @@ $large: 1024px;
 
 .header-button {
   height: 50px;
-  border-radius: 20px;
 
   @media screen and (min-width: $medium) {
     min-width: 120px;
@@ -197,11 +200,11 @@ $large: 1024px;
   transition: 0.3s;
 }
 
-.toggle-switch:checked + .toggle-label {
+.toggle-switch:checked+.toggle-label {
   background: var(--color-headings);
 }
 
-.toggle-switch:checked + .toggle-label:after {
+.toggle-switch:checked+.toggle-label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
 }
