@@ -4,11 +4,15 @@ $large: 1024px;
 
 [data-theme="light"] {
   --header-color: #6002ee;
+  --button-color: #eeeeee;
+  --button-hover-color: #aaaaaa;
   --color-headings: #0077ff;
 }
 
 [data-theme="dark"] {
   --header-color: #eeeeee;
+  --button-color: #eeeeee;
+  --button-hover-color: #aaaaaa;
   --color-headings: #3694ff;
 }
 
@@ -33,9 +37,9 @@ $large: 1024px;
 }
 
 .dropdown-container {
-  background-color: red;
   text-align: center;
   z-index: 10;
+  background-color: var(--button-color);
 
   @media screen and (min-width: $medium) {
     min-width: 120px;
@@ -51,17 +55,24 @@ $large: 1024px;
   flex-direction: column;
 
   &:hover {
-    background-color: orange;
+    background-color: var(--button-hover-color);
     cursor: pointer;
   }
 }
 
-.dropdown-item-container {}
+.dropdown-item-container {
+}
 
 .dropdown-item {
-  background-color: blue;
+  background-color: var(--button-color);
   padding: 1em;
   list-style: none;
+  border: black 1px solid;
+
+  &:hover {
+    background-color: var(--button-hover-color);
+    cursor: pointer;
+  }
 }
 
 .dropdown {
@@ -106,6 +117,7 @@ $large: 1024px;
 
 .header-button {
   height: 50px;
+  background-color: var(--button-color);
 
   @media screen and (min-width: $medium) {
     min-width: 120px;
@@ -200,11 +212,11 @@ $large: 1024px;
   transition: 0.3s;
 }
 
-.toggle-switch:checked+.toggle-label {
+.toggle-switch:checked + .toggle-label {
   background: var(--color-headings);
 }
 
-.toggle-switch:checked+.toggle-label:after {
+.toggle-switch:checked + .toggle-label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
 }
