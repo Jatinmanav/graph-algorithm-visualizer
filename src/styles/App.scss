@@ -1,11 +1,11 @@
 [data-theme="light"] {
-  --font-color: #0077ff;
+  --context-font-color: #0077ff;
   --background-color: #333333;
   --hover-color: #eeeeee;
 }
 
 [data-theme="dark"] {
-  --font-color: #3694ff;
+  --context-font-color: #3694ff;
   --background-color: #eeeeee;
   --hover-color: #333333;
 }
@@ -19,7 +19,7 @@
 }
 
 .context-menu {
-  color: var(--font-color);
+  color: var(--context-font-color);
   background-color: var(--background-color);
   width: 200px;
   border: var(--background-color) 2px solid;
@@ -32,7 +32,7 @@
 }
 
 .context-menu-option {
-  border: var(--font-color) 1px solid;
+  border: var(--context-font-color) 1px solid;
   padding: 10px;
   margin-bottom: 2px;
   height: 20px;
