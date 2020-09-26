@@ -15,6 +15,15 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
     setOpen(!open);
   };
 
+  const handleChangeNode = (
+    event: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    event.preventDefault();
+    setOpen(!open);
+    setNode(index);
+  };
+
   return (
     <div className="dropdown-container" onClick={handleClick}>
       <div className="dropdown-text">
@@ -24,7 +33,14 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
         <div className="dropdown-item-container">
           {nodeList.map((item) => {
             if (item.count !== count) {
-              return <div className="dropdown-item">Hello</div>;
+              return (
+                <div
+                  className="dropdown-item"
+                  onClick={(event) => handleChangeNode(event, item.count)}
+                >
+                  Node {item.count}
+                </div>
+              );
             } else {
               return <React.Fragment />;
             }

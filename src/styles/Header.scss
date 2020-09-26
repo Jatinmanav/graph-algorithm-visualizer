@@ -41,6 +41,7 @@ $large: 1024px;
 .dropdown-container {
   text-align: center;
   z-index: 10;
+  border: black 1px solid;
   background-color: var(--button-color);
 
   @media screen and (min-width: $medium) {
@@ -63,7 +64,11 @@ $large: 1024px;
   }
 }
 
-.dropdown-item-container {}
+.dropdown-item-container {
+  max-height: 25vh;
+  overflow-y: auto;
+  border: black 1px solid;
+}
 
 .dropdown-item {
   background-color: var(--button-color);
