@@ -5,7 +5,7 @@ import "../styles/Header.scss";
 import node from "../types/node";
 import edge from "../types/edge";
 import canvasProvider from "../types/canvasProvider";
-import Dropdown from "./Dropdown";
+import Dropdown from "../components/Dropdown";
 
 const Header = () => {
   const [source, setSource] = useState<number>(0);

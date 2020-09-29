@@ -1,22 +1,4 @@
-$small: 320px;
-$medium: 768px;
-$large: 1024px;
-
-[data-theme="light"] {
-  --header-color: #6002ee;
-  --font-color: #333333;
-  --button-color: #eeeeee;
-  --button-hover-color: #dddddd;
-  --color-headings: #0077ff;
-}
-
-[data-theme="dark"] {
-  --header-color: #eeeeee;
-  --font-color: #eeeeee;
-  --button-color: #333333;
-  --button-hover-color: #444444;
-  --color-headings: #3694ff;
-}
+@import 'Variables';
 
 .navbar {
   background-color: var(--header-color);
@@ -49,19 +31,46 @@ $large: 1024px;
   }
 }
 
-.dropdown-text {
+.dropdown-text-container {
   height: 100%;
   text-align: center;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  color: var(--font-color);
+  position: relative;
+  transition: background 250ms;
 
   &:hover {
     background-color: var(--button-hover-color);
     cursor: pointer;
   }
+}
+
+.dropdown-text {
+  color: var(--font-color);
+
+  @media screen and (min-width: $medium) {
+    position: absolute;
+    left: 1em;
+  }
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 1em;
+  top: 30%;
+  color: var(--font-color);
+
+  &:after,
+  &:before {
+    transition: all 1000ms !important;
+  }
+
+}
+
+svg {
+  fill: var(--font-color);
 }
 
 .dropdown-item-container {
@@ -75,6 +84,7 @@ $large: 1024px;
   padding: 1em;
   list-style: none;
   border: black 1px solid;
+  color: var(--font-color);
 
   &:hover {
     background-color: var(--button-hover-color);
@@ -127,6 +137,7 @@ $large: 1024px;
   background-color: var(--button-color);
   color: var(--font-color);
   border: none;
+  transition: background 350ms;
 
   &:hover {
     background-color: var(--button-hover-color);

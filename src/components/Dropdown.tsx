@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import node from "../types/node";
+import { ReactComponent as DownArrow } from "../icons/down_arrow.svg";
+import { ReactComponent as UpArrow } from "../icons/up_arrow.svg";
 
 type AppProps = {
   nodeList: node[];
@@ -26,8 +28,11 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
 
   return (
     <div className="dropdown-container" onClick={handleClick}>
-      <div className="dropdown-text">
-        <p>Node {count}</p>
+      <div className="dropdown-text-container">
+        <div className="dropdown-text"> Node {count} </div>
+        <div className="dropdown-arrow">
+          {open ? <UpArrow /> : <DownArrow />}
+        </div>
       </div>
       {open ? (
         <div className="dropdown-item-container">
