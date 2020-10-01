@@ -9,22 +9,29 @@ import node from "../types/node";
 import { CanvasContext } from "../contexts/CanvasContext";
 import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
 import depthFirstSearch from "../algorithms/depthFirstTraversal";
+import Algorithmdropdown from "../components/Algorithmdropdown";
 
 const Visualize = () => {
   const { nodeList, edgeList, adjacencyList } = useContext<
     adjacencyListProvider
   >(AdjacencyListContext);
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  const [algorithm, setAlgorithm] = useState<number>(1);
+  const [algorithm, setAlgorithm] = useState<number>(0);
+
+  const algoList = [
+    "Topological Sort",
+    "Breadth First Traversal",
+    "Depth First Traversal",
+  ];
 
   const handleVisualize = (event: React.FormEvent<HTMLDivElement>) => {
     event.preventDefault();
     let result: number[] = [];
-    if (algorithm === 1) {
+    if (algorithm === 0) {
       result = topologicalSort(adjacencyList, nodeList);
-    } else if (algorithm === 2) {
+    } else if (algorithm === 1) {
       result = breadthFirstTraversal(adjacencyList);
-    } else if (algorithm === 3) {
+    } else if (algorithm === 2) {
       result = depthFirstSearch(adjacencyList);
     }
     let resultNodes: node[] = [];
@@ -38,34 +45,13 @@ const Visualize = () => {
     visualizeAlgorithm(resultNodes, edgeList, canvas, context);
   };
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.preventDefault();
-    setAlgorithm(+event.target.value);
-  };
-
   return (
     <div className="visualize-container">
-      <select
-        name="algorithm"
-        className="visualize-select"
-        value={algorithm}
-        onChange={handleSelectChange}
-      >
-        <option className="visualize-option" value={1}>
-          Topological Sort
-        </option>
-        <option className="visualize-option" value={2}>
-          Breadth First Traversal
-        </option>
-        <option className="visualize-option" value={3}>
-          Depth First Traversal
-        </option>
-        {/* <option className="visualize-option"></option>
-        <option className="visualize-option"></option>
-        <option className="visualize-option"></option>
-        <option className="visualize-option"></option>
-        <option className="visualize-option"></option> */}
-      </select>
+      <Algorithmdropdown
+        algoList={algoList}
+        count={algorithm}
+        setAlgorithm={setAlgorithm}
+      />
       <div className="visualize-button" onClick={handleVisualize}>
         Visualize
       </div>

@@ -61,12 +61,6 @@
   right: 1em;
   top: 30%;
   color: var(--font-color);
-
-  &:after,
-  &:before {
-    transition: all 1000ms !important;
-  }
-
 }
 
 svg {
@@ -90,18 +84,6 @@ svg {
     background-color: var(--button-hover-color);
     cursor: pointer;
   }
-}
-
-.dropdown {
-  appearance: none;
-  padding: 1em;
-}
-
-.dropdown:active,
-.dropdown:focus {
-  outline: 0;
-  outline-style: none;
-  -moz-outline-style: none;
 }
 
 .source-node {
