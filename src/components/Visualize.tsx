@@ -42,7 +42,7 @@ const Visualize = () => {
         }
       }
     }
-    visualizeAlgorithm(resultNodes, edgeList, canvas, context);
+    visualizeAlgorithm(nodeList, resultNodes, edgeList, canvas, context);
   };
 
   return (

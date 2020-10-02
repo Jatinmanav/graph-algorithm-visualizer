@@ -11,8 +11,6 @@ const slowDrawNode = (
   y: number,
   color: string
 ) => {
-  console.log(count);
-  drawNode(count, context, x, y, "#ffffff");
   setTimeout(() => {
     drawNode(count, context, x, y, color);
   }, 1000 * wait);
@@ -20,6 +18,7 @@ const slowDrawNode = (
 
 const visualizeAlgorithm = (
   nodeList: node[],
+  resultList: node[],
   edgeList: edge[],
   canvas: HTMLCanvasElement | null,
   context: CanvasRenderingContext2D | null
@@ -44,9 +43,10 @@ const visualizeAlgorithm = (
       drawEdge(item.source, item.target, item.directed, context);
     }
     let i = 0;
-    console.log(nodeList);
     for (let item of nodeList) {
-      // drawNode(item.count, context, item.canvasX, item.canvasY, "#410000");
+      drawNode(item.count, context, item.canvasX, item.canvasY, "#ffffff");
+    }
+    for (let item of resultList) {
       i++;
       slowDrawNode(
         i,
