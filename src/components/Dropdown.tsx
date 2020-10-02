@@ -41,13 +41,14 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
               return (
                 <div
                   className="dropdown-item"
+                  key={item.count}
                   onClick={(event) => handleChangeNode(event, item.count)}
                 >
                   Node {item.count}
                 </div>
               );
             } else {
-              return <React.Fragment />;
+              return <React.Fragment key={item.count} />;
             }
           })}
         </div>

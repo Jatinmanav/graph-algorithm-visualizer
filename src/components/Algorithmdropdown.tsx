@@ -33,6 +33,7 @@ const Dropdown = ({ algoList, count, setAlgorithm }: AppProps) => {
             return (
               <div
                 className="algorithm-dropdown-item"
+                key={item}
                 onClick={(event) =>
                   handleChangeNode(event, algoList.indexOf(item))
                 }

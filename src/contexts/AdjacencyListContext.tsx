@@ -10,6 +10,7 @@ const initialState: adjacencyListProvider = {
   adjacencyList: [],
   addNode: (node: node) => {},
   addEdge: (edge: edge) => {},
+  addUndirectedEdge: (edgeOne: edge, edgeTwo: edge) => {},
   moveNode: (index: node) => {},
   deleteNode: (x: number, y: number) => {},
   clearNodes: () => {},
@@ -35,6 +36,21 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     setAdjacencyList(adjacencyList);
   };
 
+  const addUndirectedEdge = (edgeOne: edge, edgeTwo: edge) => {
+    let tempAdjacencyList = adjacencyList;
+    for (let item of tempAdjacencyList) {
+      if (item.count === edgeOne.source.count) {
+        item.target.push(edgeOne.target.count);
+      } else if (item.count === edgeTwo.source.count) {
+        item.target.push(edgeTwo.target.count);
+      }
+    }
+    setEdgeList([...edgeList, edgeOne, edgeTwo]);
+    setAdjacencyList(tempAdjacencyList);
+    console.log(adjacencyList);
+    console.log(edgeList);
+  };
+
   const addEdge = (edge: edge) => {
     let tempAdjacencyList = adjacencyList;
     for (let item of tempAdjacencyList) {
@@ -45,6 +61,7 @@ export const AdjacencyListContextProvider = (props: IProps) => {
     setEdgeList([...edgeList, edge]);
     setAdjacencyList(tempAdjacencyList);
     console.log(adjacencyList);
+    console.log(edgeList);
   };
 
   const moveNode = (node: node) => {
@@ -107,6 +124,7 @@ export const AdjacencyListContextProvider = (props: IProps) => {
         adjacencyList,
         addNode,
         addEdge,
+        addUndirectedEdge,
         clearNodes,
         moveNode,
         deleteNode,

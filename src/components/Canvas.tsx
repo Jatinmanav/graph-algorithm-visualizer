@@ -132,6 +132,7 @@ const Canvas = () => {
           );
           addNode(newNode);
           console.log(nodeList);
+          console.log(edgeList);
         }
       } else {
         if (button === 1) {

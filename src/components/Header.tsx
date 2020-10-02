@@ -10,7 +10,9 @@ import Dropdown from "../components/Dropdown";
 const Header = () => {
   const [source, setSource] = useState<number>(0);
   const [target, setTarget] = useState<number>(0);
-  const { nodeList, addEdge, clearNodes } = useContext(AdjacencyListContext);
+  const { nodeList, addEdge, addUndirectedEdge, clearNodes } = useContext(
+    AdjacencyListContext
+  );
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
 
   const handleThemeChange = (value: boolean): void => {
@@ -23,14 +25,6 @@ const Header = () => {
       document.documentElement.setAttribute("data-theme", "light");
     }
   };
-
-  // const handleSourceChange = (event: React.FormEvent<HTMLSelectElement>) => {
-  //   setSource((event.target as HTMLSelectElement).value);
-  // };
-
-  // const handleTargetChange = (event: React.FormEvent<HTMLSelectElement>) => {
-  //   setTarget((event.target as HTMLSelectElement).value);
-  // };
 
   const handleNewDirectedEdge = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -74,12 +68,17 @@ const Header = () => {
         }
       }
       if (sourceNode && targetNode) {
-        const newEdge: edge = {
+        const edgeOne: edge = {
           source: sourceNode,
           target: targetNode,
           directed: false,
         };
-        addEdge(newEdge);
+        const edgeTwo: edge = {
+          source: targetNode,
+          target: sourceNode,
+          directed: false,
+        };
+        addUndirectedEdge(edgeOne, edgeTwo);
       }
     }
   };
@@ -103,38 +102,6 @@ const Header = () => {
     <header className="navbar">
       <Dropdown nodeList={nodeList} count={source} setNode={setSource} />
       <Dropdown nodeList={nodeList} count={target} setNode={setTarget} />
-      {/* <select
-        value={source}
-        onChange={handleSourceChange}
-        className="source-node dropdown"
-      >
-        {nodeList.map((node) => {
-          return (
-            <option
-              key={node.count}
-              value={node.count}
-            >{`Node ${node.count}`}</option>
-          );
-        })}
-      </select>
-      <select
-        value={target}
-        onChange={handleTargetChange}
-        className="target-node dropdown"
-      >
-        {nodeList.map((node: node) => {
-          if (node.count.toString() !== source) {
-            return (
-              <option
-                key={node.count}
-                value={node.count}
-              >{`Node ${node.count}`}</option>
-            );
-          } else {
-            return <React.Fragment key={Math.random() * 100} />;
-          }
-        })}
-      </select> */}
       <button
         className="add-edge-one header-button"
         onClick={handleNewDirectedEdge}
