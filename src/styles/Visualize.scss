@@ -34,9 +34,8 @@
 
 .algorithm-dropdown-item-container {
   position: absolute;
+  width: 100%;
   bottom: 0;
-  max-height: 25vh;
-  width: 200px;
   overflow-y: auto;
   border: black 1px solid;
 }
