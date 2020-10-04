@@ -6,6 +6,7 @@ import "./styles/App.scss";
 import Header from "./components/Header";
 import Canvas from "./components/Canvas";
 import Visualize from "./components/Visualize";
+import Snackbar from "./components/Snackbar";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <div className="container">
             <Canvas />
             <Visualize />
+            <Snackbar />
           </div>
         </CanvasContextProvider>
       </AdjacencyListContextProvider>

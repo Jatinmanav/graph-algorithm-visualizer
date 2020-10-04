@@ -1,0 +1,13 @@
+@import 'Variables';
+
+.snackbar-container {
+  background-color: red;
+  position: absolute;
+  bottom: 2em;
+  left: 2em;
+}
+
+.snackbar-text {
+  color: green;
+  padding: 0 1em;
+}
