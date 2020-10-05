@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { SnackbarContext } from "../contexts/SnackbarContext";
 import "../styles/Snackbar.scss";
+import snackbarProvider from "../types/snackbarProvider";
 
 const Snackbar = () => {
-  const [message, setMessage] = useState<String>("Test String");
+  const { open, message } = useContext<snackbarProvider>(SnackbarContext);
   return (
-    <div className="snackbar-container">
-      <p className="snackbar-text">{message}</p>
+    <div>
+      {open ? (
+        <div className="snackbar-container">
+          <p className="snackbar-text">{message}</p>
+        </div>
+      ) : (
+        <React.Fragment />
+      )}
     </div>
   );
 };

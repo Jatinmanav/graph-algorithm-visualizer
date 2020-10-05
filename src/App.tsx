@@ -1,6 +1,7 @@
 import React from "react";
 import { AdjacencyListContextProvider } from "./contexts/AdjacencyListContext";
 import { CanvasContextProvider } from "./contexts/CanvasContext";
+import { SnackbarContextProvider } from "./contexts/SnackbarContext";
 import "./styles/Variables.scss";
 import "./styles/App.scss";
 import Header from "./components/Header";
@@ -13,12 +14,14 @@ const App: React.FC = () => {
     <div className="App">
       <AdjacencyListContextProvider>
         <CanvasContextProvider>
-          <Header />
-          <div className="container">
-            <Canvas />
-            <Visualize />
-            <Snackbar />
-          </div>
+          <SnackbarContextProvider>
+            <Header />
+            <div className="container">
+              <Canvas />
+              <Visualize />
+              <Snackbar />
+            </div>
+          </SnackbarContextProvider>
         </CanvasContextProvider>
       </AdjacencyListContextProvider>
     </div>
