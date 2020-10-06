@@ -2,9 +2,20 @@
 
 .snackbar-container {
   background-color: red;
+  min-height: 50px;
   position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   bottom: 2em;
   left: 2em;
+  padding: 0 1em;
+  border-radius: 5px;
+}
+
+.snackbar-close-icon {
+  cursor: pointer;
 }
 
 .snackbar-text {

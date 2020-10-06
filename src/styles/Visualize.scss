@@ -1,8 +1,7 @@
 @import 'Variables';
 
 .algorithm-dropdown-container {
-  height: 5vh;
-  min-height: 50px;
+  height: 50px;
   background-color: var(--button-color);
   border: black 1px solid;
   position: relative;
@@ -35,7 +34,7 @@
 .algorithm-dropdown-item-container {
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: 50px;
   overflow-y: auto;
   border: black 1px solid;
 }
