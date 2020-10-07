@@ -5,13 +5,18 @@ import snackbarProvider from "../types/snackbarProvider";
 import { ReactComponent as CloseIcon } from "../icons/close.svg";
 
 const Snackbar = () => {
-  const { open, message } = useContext<snackbarProvider>(SnackbarContext);
+  const { open, message, toggleSnackbar } = useContext<snackbarProvider>(
+    SnackbarContext
+  );
   return (
     <div>
       {open ? (
         <div className="snackbar-container">
           <p className="snackbar-text">{message}</p>
-          <CloseIcon className="snackbar-close-icon" />
+          <CloseIcon
+            onClick={() => toggleSnackbar()}
+            className="snackbar-close-icon"
+          />
         </div>
       ) : (
         <React.Fragment />
