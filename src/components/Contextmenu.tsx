@@ -27,8 +27,9 @@ type position = {
   y: number;
 };
 
-type positionTwo = {
+type newedgePosition = {
   x: number;
+  edgeCase: boolean;
   y1: number;
   y2: number;
 };
@@ -36,10 +37,16 @@ type positionTwo = {
 const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const [newedge, setNewedge] = useState<DropdownMenu>({ isOpen: false });
   const [pos, setPos] = useState<position>({ x: 0, y: 0 });
-  const [divpos, setDivpos] = useState<positionTwo>({ x: 0, y1: 0, y2: 0 });
+  const [divpos, setDivpos] = useState<newedgePosition>({
+    x: 0,
+    edgeCase: false,
+    y1: 0,
+    y2: 0,
+  });
   const [index, setIndex] = useState<number>(-1);
   const [result, setResult] = useState<boolean>(true);
-  const divElement = useRef<HTMLDivElement>(null);
+  const divElementOne = useRef<HTMLDivElement>(null);
+  const divElementTwo = useRef<HTMLDivElement>(null);
   //eslint-disable-next-line
   const { isOpen, x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
@@ -56,21 +63,24 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
     if (y + 150 > window.innerHeight) {
       innerY = y - 100;
     }
-    if (divElement.current != null) {
-      const rect = divElement.current.getBoundingClientRect();
-      let right = rect.right;
-      let top = rect.top;
-      let bottom = rect.bottom;
-      if (rect.right + 200 > window.innerWidth) {
+    if (divElementOne.current != null) {
+      const rectOne = divElementOne.current.getBoundingClientRect();
+      const rectTwo = divElementOne.current.getBoundingClientRect();
+      let edgePos = false;
+      let right = rectOne.right;
+      let top = rectOne.top;
+      let bottom = rectOne.bottom;
+      if (rectOne.right + 200 > window.innerWidth) {
         right = right - 400;
       }
-      if (rect.top + 150 > window.innerHeight) {
-        top = top - 200;
+      if (rectOne.top + 150 > window.innerHeight) {
+        top = window.innerHeight - rectTwo.top - 45;
+        bottom = window.innerHeight - rectTwo.bottom - 45;
+        edgePos = true;
       }
-      if (rect.bottom + 150 > window.innerHeight) {
-        bottom = bottom - 200;
-      }
-      setDivpos({ x: right, y1: top, y2: bottom });
+      console.log("top ", top);
+      console.log("bottom ", bottom);
+      setDivpos({ x: right, edgeCase: edgePos, y1: top, y2: bottom });
     }
     setPos({ x: innerX, y: innerY });
     setResult(contextMenuState(nodeList, x, y));
@@ -160,11 +170,19 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
       {newedge.isOpen ? (
         <div
           className="context-menu context-menu-new-edge"
-          style={{
-            left: divpos.x,
-            top: newedge.directed ? divpos.y1 : divpos.y2,
-            position: "absolute",
-          }}
+          style={
+            divpos.edgeCase
+              ? {
+                  left: divpos.x,
+                  bottom: newedge.directed ? divpos.y1 : divpos.y2,
+                  position: "absolute",
+                }
+              : {
+                  left: divpos.x,
+                  top: newedge.directed ? divpos.y1 : divpos.y2,
+                  position: "absolute",
+                }
+          }
         >
           {nodeList.map((value: node) => {
             if (value.count !== index && newedge.directed !== undefined) {
@@ -204,7 +222,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             </div>
             <div
               className="context-menu-option context-menu-arrow"
-              ref={divElement}
+              ref={divElementOne}
               onMouseEnter={handleMouseInDirected}
             >
               <span className="context-menu-arrow-text">
@@ -214,6 +232,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
             </div>
             <div
               className="context-menu-option context-menu-arrow"
+              ref={divElementTwo}
               onMouseEnter={handleMouseInUndirected}
             >
               <span className="context-menu-arrow-text context-menu-arrow">
