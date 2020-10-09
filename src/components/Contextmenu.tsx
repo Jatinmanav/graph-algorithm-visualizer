@@ -73,7 +73,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
       if (rectOne.right + 200 > window.innerWidth) {
         right = right - 400;
       }
-      if (rectOne.top + 150 > window.innerHeight) {
+      if (rectOne.top + 200 > window.innerHeight) {
         top = window.innerHeight - rectTwo.top - 45;
         bottom = window.innerHeight - rectTwo.bottom - 45;
         edgePos = true;

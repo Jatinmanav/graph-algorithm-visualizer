@@ -14,8 +14,8 @@ type Iprops = {
 };
 
 export const SnackbarContextProvider = (props: Iprops) => {
-  const [open, setOpen] = useState<boolean>(true);
-  const [message, setMessage] = useState<string>("Test String");
+  const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
   const toggleSnackbar = (message: string = "") => {
     if (message.length < 1) {
