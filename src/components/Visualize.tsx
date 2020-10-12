@@ -22,6 +22,7 @@ const Visualize = () => {
     "Topological Sort",
     "Breadth First Traversal",
     "Depth First Traversal",
+    "Djikstras Shortest Path",
   ];
 
   const handleVisualize = (event: React.FormEvent<HTMLDivElement>) => {
