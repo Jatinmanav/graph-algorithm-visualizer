@@ -10,7 +10,6 @@ import Dropdown from "../components/Dropdown";
 const Header = () => {
   const [source, setSource] = useState<number>(0);
   const [target, setTarget] = useState<number>(0);
-  const [weight, setWeight] = useState<number>(0);
   const { nodeList, addEdge, addUndirectedEdge, clearNodes } = useContext(
     AdjacencyListContext
   );
@@ -46,7 +45,7 @@ const Header = () => {
           source: sourceNode,
           target: targetNode,
           directed: true,
-          weight: weight,
+          weight: 1,
         };
         addEdge(newEdge);
       }
@@ -74,13 +73,13 @@ const Header = () => {
           source: sourceNode,
           target: targetNode,
           directed: false,
-          weight: weight,
+          weight: 1,
         };
         const edgeTwo: edge = {
           source: targetNode,
           target: sourceNode,
           directed: false,
-          weight: weight,
+          weight: 1,
         };
         addUndirectedEdge(edgeOne, edgeTwo);
       }

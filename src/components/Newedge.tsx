@@ -9,10 +9,9 @@ type AppProps = {
   source: number;
   target: number;
   directed: boolean;
-  weight?: number;
 };
 
-const Newedge = ({ source, target, directed, weight = 0 }: AppProps) => {
+const Newedge = ({ source, target, directed }: AppProps) => {
   const { nodeList, addEdge, addUndirectedEdge } = useContext(
     AdjacencyListContext
   );
@@ -37,7 +36,7 @@ const Newedge = ({ source, target, directed, weight = 0 }: AppProps) => {
           source: sourceNode,
           target: targetNode,
           directed: true,
-          weight: weight,
+          weight: 1,
         };
         addEdge(newEdge);
       }
@@ -63,13 +62,13 @@ const Newedge = ({ source, target, directed, weight = 0 }: AppProps) => {
           source: sourceNode,
           target: targetNode,
           directed: false,
-          weight: weight,
+          weight: 1,
         };
         const edgeTwo: edge = {
           source: targetNode,
           target: sourceNode,
           directed: false,
-          weight: weight,
+          weight: 1,
         };
         addUndirectedEdge(edgeOne, edgeTwo);
       }
