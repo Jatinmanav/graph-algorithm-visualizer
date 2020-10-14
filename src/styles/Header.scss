@@ -39,7 +39,7 @@
   align-content: center;
   flex-direction: column;
   position: relative;
-  transition: background 250ms;
+  transition: background 350ms;
 
   &:hover {
     background-color: var(--button-hover-color);
@@ -79,6 +79,7 @@ svg {
   list-style: none;
   border: black 1px solid;
   color: var(--font-color);
+  transition: background 350ms;
 
   &:hover {
     background-color: var(--button-hover-color);

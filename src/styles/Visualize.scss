@@ -14,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  transition: background 250ms;
+  transition: background 350ms;
 
   &:hover {
     background-color: var(--button-hover-color);
@@ -45,6 +45,7 @@
   list-style: none;
   border: black 1px solid;
   color: var(--font-color);
+  transition: background 350ms;
 
   &:hover {
     background-color: var(--button-hover-color);
@@ -74,10 +75,11 @@
   border-top: none;
   background-color: #eeeeee;
   cursor: pointer;
-}
+  transition: background 350ms;
 
-.visualize-button:hover {
-  background-color: #cccccc;
+  &:hover {
+    background-color: #cccccc;
+  }
 }
 
 .visualize-select {
