@@ -1,4 +1,6 @@
-.App {}
+.App {
+  font-family: Hack, Arial, Helvetica, sans-serif;
+}
 
 ::-webkit-scrollbar {
   width: 0.3em;
@@ -6,12 +8,14 @@
 
 ::-webkit-scrollbar-track {
   background-color: var(--button-color);
-  border-radius: 20px;
+  border: black 1px solid;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--header-color);
-  border-radius: 20px;
+  border: black 1px solid;
+  border-radius: 5px;
 }
 
 .canvas {
