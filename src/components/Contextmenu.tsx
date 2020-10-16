@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { CanvasContext } from "../contexts/CanvasContext";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import { ReactComponent as RightArrow } from "../icons/right_arrow.svg";
 import node from "../types/node";
 import contextMenu from "../types/contextMenu";
 import canvasProvider from "../types/canvasProvider";
@@ -71,7 +72,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
       let top = rectOne.top;
       let bottom = rectOne.bottom;
       if (rectOne.right + 200 > window.innerWidth) {
-        right = right - 400;
+        right = right - 403;
       }
       if (rectOne.top + 200 > window.innerHeight) {
         top = window.innerHeight - rectTwo.top - 45;
@@ -209,36 +210,36 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
         {result ? (
           <div>
             <div className="context-menu-option" onClick={handleAddNode}>
-              Add Node
+              <span className="context-menu-text">Add Node</span>
             </div>
             <div className="context-menu-option" onClick={handleClearCanvas}>
-              Clear Canvas
+              <span className="context-menu-text">Clear Canvas</span>
             </div>
           </div>
         ) : (
           <div>
             <div className="context-menu-option" onClick={handleDeleteNode}>
-              Delete Node
+              <span className="context-menu-text">Delete Node</span>
             </div>
             <div
               className="context-menu-option context-menu-arrow"
               ref={divElementOne}
               onMouseEnter={handleMouseInDirected}
             >
-              <span className="context-menu-arrow-text">
+              <span className="context-menu-arrow-text context-menu-text">
                 Add Direceted Edge
               </span>
-              <span className="context-menu-arrow-head">&#129170;</span>
+              <RightArrow className="context-menu-arrow-head" />
             </div>
             <div
               className="context-menu-option context-menu-arrow"
               ref={divElementTwo}
               onMouseEnter={handleMouseInUndirected}
             >
-              <span className="context-menu-arrow-text context-menu-arrow">
+              <span className="context-menu-arrow-text context-menu-text">
                 Add Undireceted Edge
               </span>
-              <span className="context-menu-arrow-head">&#129170;</span>
+              <RightArrow className="context-menu-arrow-head" />
             </div>
           </div>
         )}

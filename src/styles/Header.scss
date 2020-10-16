@@ -23,7 +23,7 @@
 .dropdown-container {
   text-align: center;
   z-index: 10;
-  border: black 1px solid;
+  border: var(--font-color) 1px solid;
   border-radius: 5px;
   background-color: var(--button-color);
 
@@ -70,10 +70,9 @@ svg {
 }
 
 .dropdown-item-container {
-  min-height: 10vh;
   max-height: 12em;
   overflow-y: auto;
-  border: black 1px solid;
+  border: var(--font-color) 1px solid;
   border-radius: 5px;
   margin-top: 0.2em;
 }
@@ -83,7 +82,7 @@ svg {
   padding: 1em;
   height: 1em;
   list-style: none;
-  border-bottom: black 1px solid;
+  border-bottom: var(--font-color) 1px solid;
   color: var(--font-color);
   transition: background 350ms;
 
@@ -123,9 +122,10 @@ svg {
   height: 50px;
   background-color: var(--button-color);
   color: var(--font-color);
-  border: black 1px solid;
+  border: var(--font-color) 1px solid;
   border-radius: 5px;
-  font-family: Hack;
+  font-size: 0.9em;
+  font-family: "Roboto", sans-serif;
   transition: background 350ms;
 
   &:hover {

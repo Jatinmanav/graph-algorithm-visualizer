@@ -79,9 +79,9 @@ const Newedge = ({ source, target, directed }: AppProps) => {
     <div
       key={target}
       onClick={directed ? handleAddDirectedEdge : handleAddUndirectedEdge}
-      className="context-menu-option"
+      className="context-menu-option context-menu-edge-option"
     >
-      {target}
+      Node {target}
     </div>
   );
 };
