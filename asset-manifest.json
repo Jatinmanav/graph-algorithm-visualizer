@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/graph-algorithm-visualizer/static/css/main.7ae44aca.chunk.css",
+    "main.js": "/graph-algorithm-visualizer/static/js/main.0f04200b.chunk.js",
+    "main.js.map": "/graph-algorithm-visualizer/static/js/main.0f04200b.chunk.js.map",
+    "runtime-main.js": "/graph-algorithm-visualizer/static/js/runtime-main.4e49bcc5.js",
+    "runtime-main.js.map": "/graph-algorithm-visualizer/static/js/runtime-main.4e49bcc5.js.map",
+    "static/js/2.be0df985.chunk.js": "/graph-algorithm-visualizer/static/js/2.be0df985.chunk.js",
+    "static/js/2.be0df985.chunk.js.map": "/graph-algorithm-visualizer/static/js/2.be0df985.chunk.js.map",
+    "index.html": "/graph-algorithm-visualizer/index.html",
+    "precache-manifest.57e889dfa115eae430fb3929bfce1586.js": "/graph-algorithm-visualizer/precache-manifest.57e889dfa115eae430fb3929bfce1586.js",
+    "service-worker.js": "/graph-algorithm-visualizer/service-worker.js",
+    "static/css/main.7ae44aca.chunk.css.map": "/graph-algorithm-visualizer/static/css/main.7ae44aca.chunk.css.map",
+    "static/js/2.be0df985.chunk.js.LICENSE.txt": "/graph-algorithm-visualizer/static/js/2.be0df985.chunk.js.LICENSE.txt",
+    "static/media/close.77ba6520.svg": "/graph-algorithm-visualizer/static/media/close.77ba6520.svg",
+    "static/media/down_arrow.7409de40.svg": "/graph-algorithm-visualizer/static/media/down_arrow.7409de40.svg",
+    "static/media/right_arrow.47d81b84.svg": "/graph-algorithm-visualizer/static/media/right_arrow.47d81b84.svg",
+    "static/media/up_arrow.969b1a78.svg": "/graph-algorithm-visualizer/static/media/up_arrow.969b1a78.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4e49bcc5.js",
+    "static/js/2.be0df985.chunk.js",
+    "static/css/main.7ae44aca.chunk.css",
+    "static/js/main.0f04200b.chunk.js"
+  ]
+}
