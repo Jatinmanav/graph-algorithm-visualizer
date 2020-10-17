@@ -147,12 +147,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const handleDeleteNode = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
     deleteNode(x, y);
-    let theme = document.documentElement.getAttribute("data-theme");
-    let edgeColor = "#333333";
-    if (theme) {
-      edgeColor = "#eeeeee";
-    }
-    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor);
+    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
     setContextMenuState(false);
   };
 
