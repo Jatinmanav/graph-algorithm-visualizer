@@ -6,13 +6,18 @@ import node from "../types/node";
 import edge from "../types/edge";
 import canvasProvider from "../types/canvasProvider";
 import Dropdown from "../components/Dropdown";
+import redrawCanvas from "../actions/redrawCanvas";
 
 const Header = () => {
   const [source, setSource] = useState<number>(0);
   const [target, setTarget] = useState<number>(0);
-  const { nodeList, addEdge, addUndirectedEdge, clearNodes } = useContext(
-    AdjacencyListContext
-  );
+  const {
+    nodeList,
+    edgeList,
+    addEdge,
+    addUndirectedEdge,
+    clearNodes,
+  } = useContext(AdjacencyListContext);
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
 
   const handleThemeChange = (value: boolean): void => {
@@ -20,9 +25,11 @@ const Header = () => {
     if (value) {
       trans();
       document.documentElement.setAttribute("data-theme", "dark");
+      redrawCanvas(nodeList, edgeList, canvas, context, "#eeeeee");
     } else {
       trans();
       document.documentElement.setAttribute("data-theme", "light");
+      redrawCanvas(nodeList, edgeList, canvas, context, "#333333");
     }
   };
 

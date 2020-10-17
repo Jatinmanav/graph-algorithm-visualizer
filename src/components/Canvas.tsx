@@ -10,6 +10,7 @@ import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
 import createNode from "../actions/createNode";
 import drawNode from "../actions/drawNode";
+import edgeColor from "../actions/edgeColor";
 import Contextmenu from "../components/Contextmenu";
 
 const Canvas = () => {
@@ -50,7 +51,7 @@ const Canvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    redrawCanvas(nodeList, edgeList, canvas, context);
+    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
     //eslint-disable-next-line
   }, [width, height, nodeList, edgeList, setCanvas, setContext]);
 
@@ -104,7 +105,7 @@ const Canvas = () => {
       setNodetomove(node);
 
       moveNode(nodetomove);
-      redrawCanvas(nodeList, edgeList, canvas, context);
+      redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
     }
   };
 

@@ -7,13 +7,14 @@ const drawNode = (
 ): void => {
   context.beginPath();
   context.arc(x, y, 20, 0, 2 * Math.PI, false);
-  context.lineWidth = 3;
+  context.lineWidth = 2;
   context.fillStyle = color;
   context.fill();
   context.fillStyle = "#000000";
+  context.strokeStyle = "#000000";
   context.arc(x, y, 20, 0, 2 * Math.PI, false);
   context.stroke();
-  context.font = "20px Hack";
+  context.font = "20px Roboto";
   context.textAlign = "center";
   context.textBaseline = "middle";
   context.fillText(nodeCount.toString(), x, y);

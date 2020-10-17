@@ -4,7 +4,8 @@ function drawArrowhead(
   context: CanvasRenderingContext2D,
   from: [number, number],
   to: [number, number],
-  radius: number
+  radius: number,
+  color: string
 ) {
   let [x_center, y_center] = to;
   let [fromX, fromY] = from;
@@ -12,6 +13,7 @@ function drawArrowhead(
   let angle;
   let x;
   let y;
+  context.fillStyle = color;
 
   angle = Math.atan2(y_center - fromY, x_center - fromX);
   x = x_center;
@@ -40,7 +42,8 @@ const drawEdge = (
   source: node,
   target: node,
   directed: boolean,
-  context: CanvasRenderingContext2D
+  context: CanvasRenderingContext2D,
+  color: string
 ): void => {
   let sourceX = source.canvasX;
   let sourceY = source.canvasY;
@@ -52,12 +55,14 @@ const drawEdge = (
   sourceX = sourceX + 20 * Math.cos(theta);
   sourceY = sourceY + 20 * Math.sin(theta);
   context.lineWidth = 3;
+  context.strokeStyle = color;
+  context.fillStyle = color;
   context.beginPath();
   context.moveTo(sourceX, sourceY);
   context.lineTo(targetX, targetY);
   context.stroke();
   if (directed) {
-    drawArrowhead(context, [sourceX, sourceY], [targetX, targetY], 15);
+    drawArrowhead(context, [sourceX, sourceY], [targetX, targetY], 15, color);
   }
 };
 

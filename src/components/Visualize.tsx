@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import "../styles/Visualize.scss";
 import visualizeAlgorithm from "../actions/visualizeAlgorithm";
+import edgeColor from "../actions/edgeColor";
 import topologicalSort from "../algorithms/topologicalSort";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import adjacencyListProvider from "../types/adjacencyListProvider";
@@ -22,7 +23,6 @@ const Visualize = () => {
     "Topological Sort",
     "Breadth First Traversal",
     "Depth First Traversal",
-    "Djikstras Shortest Path",
   ];
 
   const handleVisualize = (event: React.FormEvent<HTMLDivElement>) => {
@@ -44,7 +44,14 @@ const Visualize = () => {
       }
     }
     console.log(edgeList);
-    visualizeAlgorithm(nodeList, resultNodes, edgeList, canvas, context);
+    visualizeAlgorithm(
+      nodeList,
+      resultNodes,
+      edgeList,
+      canvas,
+      context,
+      edgeColor(document)
+    );
   };
 
   return (

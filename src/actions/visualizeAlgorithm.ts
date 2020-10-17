@@ -21,7 +21,8 @@ const visualizeAlgorithm = (
   resultList: node[],
   edgeList: edge[],
   canvas: HTMLCanvasElement | null,
-  context: CanvasRenderingContext2D | null
+  context: CanvasRenderingContext2D | null,
+  edgeColor: string
 ) => {
   if (canvas && context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -40,7 +41,7 @@ const visualizeAlgorithm = (
       }
     }
     for (let item of edgeList) {
-      drawEdge(item.source, item.target, item.directed, context);
+      drawEdge(item.source, item.target, item.directed, context, edgeColor);
     }
     let i = 0;
     for (let item of nodeList) {
@@ -54,7 +55,7 @@ const visualizeAlgorithm = (
         context,
         item.canvasX,
         item.canvasY,
-        "#414141"
+        "#3694ff"
       );
     }
   }

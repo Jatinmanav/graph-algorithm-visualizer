@@ -11,6 +11,7 @@ import createNode from "../actions/createNode";
 import contextMenuState from "../actions/contextMenuState";
 import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
+import edgeColor from "../actions/edgeColor";
 import Newedge from "./Newedge";
 
 type AppProps = {
@@ -48,8 +49,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const [result, setResult] = useState<boolean>(true);
   const divElementOne = useRef<HTMLDivElement>(null);
   const divElementTwo = useRef<HTMLDivElement>(null);
-  //eslint-disable-next-line
-  const { isOpen, x, y } = contextmenu;
+  const { x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
   const { nodeList, edgeList, addNode, clearNodes, deleteNode } = useContext<
     adjacencyListProvider
@@ -147,7 +147,12 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const handleDeleteNode = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
     deleteNode(x, y);
-    redrawCanvas(nodeList, edgeList, canvas, context);
+    let theme = document.documentElement.getAttribute("data-theme");
+    let edgeColor = "#333333";
+    if (theme) {
+      edgeColor = "#eeeeee";
+    }
+    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor);
     setContextMenuState(false);
   };
 
