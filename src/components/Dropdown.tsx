@@ -36,21 +36,25 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
       </div>
       {open ? (
         <div className="dropdown-item-container">
-          {nodeList.map((item) => {
-            if (item.count !== count) {
-              return (
-                <div
-                  className="dropdown-item"
-                  key={item.count}
-                  onClick={(event) => handleChangeNode(event, item.count)}
-                >
-                  Node {item.count}
-                </div>
-              );
-            } else {
-              return <React.Fragment key={item.count} />;
-            }
-          })}
+          {nodeList.length === 1 ? (
+            <div className="dropdown-item">Nodes Unavailable</div>
+          ) : (
+            nodeList.map((item) => {
+              if (item.count !== count) {
+                return (
+                  <div
+                    className="dropdown-item"
+                    key={item.count}
+                    onClick={(event) => handleChangeNode(event, item.count)}
+                  >
+                    Node {item.count}
+                  </div>
+                );
+              } else {
+                return <React.Fragment key={item.count} />;
+              }
+            })
+          )}
         </div>
       ) : (
         <React.Fragment />
