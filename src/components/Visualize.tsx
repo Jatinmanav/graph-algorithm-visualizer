@@ -9,7 +9,7 @@ import canvasProvider from "../types/canvasProvider";
 import node from "../types/node";
 import { CanvasContext } from "../contexts/CanvasContext";
 import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
-import depthFirstSearch from "../algorithms/depthFirstTraversal";
+import depthFirstTraversal from "../algorithms/depthFirstTraversal";
 import Algorithmdropdown from "../components/Algorithmdropdown";
 
 const Visualize = () => {
@@ -33,7 +33,7 @@ const Visualize = () => {
     } else if (algorithm === 1) {
       result = breadthFirstTraversal(adjacencyList);
     } else if (algorithm === 2) {
-      result = depthFirstSearch(adjacencyList);
+      result = depthFirstTraversal(adjacencyList);
     }
     let resultNodes: node[] = [];
     for (let item of result) {

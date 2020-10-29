@@ -34,6 +34,18 @@ Array [
     "type": "arc",
   },
   Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "closePath",
+  },
+  Object {
     "props": Object {
       "anticlockwise": false,
       "endAngle": 6.283185307179586,
