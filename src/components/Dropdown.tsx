@@ -36,7 +36,7 @@ const Dropdown = ({ nodeList, count, setNode }: AppProps) => {
       </div>
       {open ? (
         <div className="dropdown-item-container">
-          {nodeList.length === 1 ? (
+          {nodeList.length <= 1 ? (
             <div className="dropdown-item">Nodes Unavailable</div>
           ) : (
             nodeList.map((item) => {

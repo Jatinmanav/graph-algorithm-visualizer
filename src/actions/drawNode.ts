@@ -8,11 +8,11 @@ const drawNode = (
   context.beginPath();
   context.arc(x, y, 20, 0, 2 * Math.PI, false);
   context.lineWidth = 2;
-  context.fillStyle = "#ffffff";
+  context.fillStyle = color;
   context.closePath();
   context.fill();
   context.strokeStyle = "#121212";
-  context.fillStyle = "#000000";
+  context.fillStyle = "#121212";
   context.arc(x, y, 20, 0, 2 * Math.PI, false);
   context.stroke();
   context.font = "20px Roboto";
