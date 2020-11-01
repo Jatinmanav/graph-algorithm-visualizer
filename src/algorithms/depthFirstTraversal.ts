@@ -31,7 +31,6 @@ const depthFirstTraversal = (
       visited,
       adjacencyList[0].count
     );
-    console.log(result);
   }
   return result;
 };

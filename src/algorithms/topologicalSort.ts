@@ -3,9 +3,7 @@ import node from "../types/node";
 
 const getIndex = (adjacencyList: adjacencyListObject[], count: number) => {
   for (let item in adjacencyList) {
-    console.log(adjacencyList[item].count, count);
     if (adjacencyList[+item].count - count === 0) {
-      console.log(adjacencyList[item].count, count);
       return +item;
     }
   }
@@ -21,8 +19,6 @@ const dfs = (
   result: number[]
 ): boolean => {
   const index = getIndex(adjacencyList, count);
-  console.log(index);
-  console.log(adjacencyList);
   visited.add(count);
   tempVisited.add(count);
   if (adjacencyList[index].target.length === 0) {
@@ -30,13 +26,9 @@ const dfs = (
   }
   for (let item of adjacencyList[index].target) {
     if (tempVisited.has(item) === true) {
-      console.log(adjacencyList[index]);
-      console.log(tempVisited);
-      console.log(item);
       return false;
     }
     if (visited.has(item) === false) {
-      console.log(item);
       let value: boolean = dfs(
         adjacencyList,
         nodeList,
@@ -78,7 +70,6 @@ const topologicalSort = (
       }
     }
   }
-  console.log(result);
   return result;
 };
 

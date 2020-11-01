@@ -11,6 +11,7 @@ import { CanvasContext } from "../contexts/CanvasContext";
 import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
 import depthFirstTraversal from "../algorithms/depthFirstTraversal";
 import Algorithmdropdown from "../components/Algorithmdropdown";
+import cycleDetection from "../algorithms/cycleDetection";
 
 const Visualize = () => {
   const { nodeList, edgeList, adjacencyList } = useContext<
@@ -23,9 +24,11 @@ const Visualize = () => {
     "Topological Sort",
     "Breadth First Traversal",
     "Depth First Traversal",
+    "Graph Cycle Detection",
   ];
 
   const handleVisualize = (event: React.FormEvent<HTMLDivElement>) => {
+    let errorDetected: boolean = false;
     event.preventDefault();
     let result: number[] = [];
     if (algorithm === 0) {
@@ -34,6 +37,9 @@ const Visualize = () => {
       result = breadthFirstTraversal(adjacencyList);
     } else if (algorithm === 2) {
       result = depthFirstTraversal(adjacencyList);
+    } else if (algorithm === 3) {
+      ({ errorDetected, result } = cycleDetection(adjacencyList));
+      console.log(errorDetected);
     }
     let resultNodes: node[] = [];
     for (let item of result) {

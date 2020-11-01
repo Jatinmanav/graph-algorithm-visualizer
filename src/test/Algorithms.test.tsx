@@ -12,6 +12,13 @@ const nodeListOne: node[] = [];
 const adjacencyListTwo: adjacencyListObject[] = [{ count: 0, target: [] }];
 const nodeListTwo: node[] = [createNode(0, 100, 100, 100, 100, 500, 500)];
 
+const adjacencyListThree: adjacencyListObject[] = [
+  { count: 0, target: [1] },
+  { count: 1, target: [2] },
+  { count: 2, target: [3] },
+  { count: 3, target: [0] },
+];
+
 test("Breadth First Traversal Works", () => {
   const resultOne = breadthFirstTraversal(adjacencyListOne);
   expect(resultOne).toEqual([]);
@@ -42,8 +49,14 @@ test("Cycle Detection Works", () => {
     errorDetected: false,
     result: [0],
   };
+  const expectedResultThree = {
+    errorDetected: true,
+    result: [0],
+  };
   const resultOne = cycleDetection(adjacencyListOne);
   expect(resultOne).toEqual(expectedResultOne);
   const resultTwo = cycleDetection(adjacencyListTwo);
   expect(resultTwo).toEqual(expectedResultTwo);
+  const resultThree = cycleDetection(adjacencyListThree);
+  expect(resultThree.errorDetected).toEqual(expectedResultThree.errorDetected);
 });

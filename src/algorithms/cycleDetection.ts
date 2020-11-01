@@ -16,7 +16,7 @@ const cycleDetectionHelper = (
       if (item.count === count) {
         for (let iter of item.target) {
           if (
-            !visited.has(count) &&
+            !visited.has(iter) &&
             cycleDetectionHelper(adjacencyList, iter, visited, recStack, result)
           )
             return true;
