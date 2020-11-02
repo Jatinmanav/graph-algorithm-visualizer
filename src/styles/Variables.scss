@@ -6,7 +6,9 @@ $extra-large: 1200px;
 [data-theme="light"] {
   --header-color: #6002ee;
   --font-color: #121212;
+  --snackbar-font-color: #eeeeee;
   --button-color: #eeeeee;
+  --visualize-button-color: #eeeeee;
   --canvas-color: #eeeeee;
   --button-hover-color: #dddddd;
   --color-headings: #0077ff;
@@ -17,7 +19,9 @@ $extra-large: 1200px;
 [data-theme="dark"] {
   --header-color: #1f1b24;
   --font-color: #bb86f6;
+  --snackbar-font-color: #bb86f6;
   --button-color: #121212;
+  --visualize-button-color: #1f1b24;
   --canvas-color: #121212;
   --button-hover-color: #2e243d;
   --color-headings: #03dac5;

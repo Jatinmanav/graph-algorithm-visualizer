@@ -12,12 +12,15 @@ import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
 import depthFirstTraversal from "../algorithms/depthFirstTraversal";
 import Algorithmdropdown from "../components/Algorithmdropdown";
 import cycleDetection from "../algorithms/cycleDetection";
+import { SnackbarContext } from "../contexts/SnackbarContext";
+import snackbarProvider from "../types/snackbarProvider";
 
 const Visualize = () => {
   const { nodeList, edgeList, adjacencyList } = useContext<
     adjacencyListProvider
   >(AdjacencyListContext);
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
+  const { toggleSnackbar } = useContext<snackbarProvider>(SnackbarContext);
   const [algorithm, setAlgorithm] = useState<number>(0);
 
   const algoList = [
@@ -39,7 +42,8 @@ const Visualize = () => {
       result = depthFirstTraversal(adjacencyList);
     } else if (algorithm === 3) {
       ({ errorDetected, result } = cycleDetection(adjacencyList));
-      console.log(errorDetected);
+      if (errorDetected) toggleSnackbar("Cycle Detected");
+      else toggleSnackbar("No Cycle Detected");
     }
     let resultNodes: node[] = [];
     for (let item of result) {
