@@ -29,9 +29,6 @@ const visualizeAlgorithm = (
     const rect = canvas.getBoundingClientRect();
     for (let item of nodeList) {
       if (rect.right !== item.windowX || rect.bottom !== item.windowY) {
-        console.log(item.count);
-        console.log(item.windowY);
-        console.log(window.innerHeight);
         item.clientX = item.clientX * (rect.right / item.windowX);
         item.clientY = item.clientY * (rect.bottom / item.windowY);
         item.canvasX = item.clientX - rect.left;
