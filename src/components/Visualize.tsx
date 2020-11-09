@@ -14,6 +14,7 @@ import Algorithmdropdown from "../components/Algorithmdropdown";
 import cycleDetection from "../algorithms/cycleDetection";
 import { SnackbarContext } from "../contexts/SnackbarContext";
 import snackbarProvider from "../types/snackbarProvider";
+import visualizeColor from "../actions/visualizeColor";
 
 const Visualize = () => {
   const { nodeList, edgeList, adjacencyList } = useContext<
@@ -42,8 +43,6 @@ const Visualize = () => {
       result = depthFirstTraversal(adjacencyList);
     } else if (algorithm === 3) {
       ({ errorDetected, result } = cycleDetection(adjacencyList));
-      if (errorDetected) toggleSnackbar("Cycle Detected");
-      else toggleSnackbar("No Cycle Detected");
     }
     let resultNodes: node[] = [];
     for (let item of result) {
@@ -60,8 +59,14 @@ const Visualize = () => {
       edgeList,
       canvas,
       context,
-      edgeColor(document)
-    );
+      edgeColor(document),
+      visualizeColor(document)
+    ).then((val) => {
+      if (val && algorithm === 3) {
+        if (errorDetected) toggleSnackbar("Cycle Detected");
+        else toggleSnackbar("No Cycle Detected");
+      }
+    });
   };
 
   return (

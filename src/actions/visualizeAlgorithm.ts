@@ -3,17 +3,24 @@ import edge from "../types/edge";
 import drawNode from "../actions/drawNode";
 import drawEdge from "../actions/drawEdge";
 
-const slowDrawNode = (
-  wait: number,
-  count: number,
+const slowDrawNode = async (
+  resultList: node[],
   context: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  color: string
+  nodeColor: string,
+  res: (value: boolean) => any
 ) => {
-  setTimeout(() => {
-    drawNode(count, context, x, y, color);
-  }, 1000 * wait);
+  let promises = [];
+  for (let item of resultList) {
+    promises.push(
+      new Promise((res, rej) => {
+        setTimeout(() => {
+          drawNode(item.count, context, item.canvasX, item.canvasY, nodeColor);
+          res(true);
+        }, 1000 * resultList.findIndex((node) => node.count === item.count));
+      })
+    );
+  }
+  Promise.all(promises).then(() => res(true));
 };
 
 const visualizeAlgorithm = (
@@ -22,8 +29,9 @@ const visualizeAlgorithm = (
   edgeList: edge[],
   canvas: HTMLCanvasElement | null,
   context: CanvasRenderingContext2D | null,
-  edgeColor: string
-) => {
+  edgeColor: string,
+  highlightColor: string
+): Promise<boolean> => {
   if (canvas && context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     const rect = canvas.getBoundingClientRect();
@@ -40,22 +48,16 @@ const visualizeAlgorithm = (
     for (let item of edgeList) {
       drawEdge(item.source, item.target, item.directed, context, edgeColor);
     }
-    let i = 0;
     for (let item of nodeList) {
       drawNode(item.count, context, item.canvasX, item.canvasY, "#ffffff");
     }
-    for (let item of resultList) {
-      i++;
-      slowDrawNode(
-        i,
-        item.count,
-        context,
-        item.canvasX,
-        item.canvasY,
-        "#3694ff"
-      );
-    }
+    return new Promise<boolean>((res) =>
+      slowDrawNode(resultList, context, highlightColor, res)
+    );
   }
+  return new Promise<boolean>((res, rej) => {
+    rej(0);
+  });
 };
 
 export default visualizeAlgorithm;
