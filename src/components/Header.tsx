@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
-import "../styles/Header.scss";
-import node from "../types/node";
-import edge from "../types/edge";
-import canvasProvider from "../types/canvasProvider";
 import Dropdown from "../components/Dropdown";
 import redrawCanvas from "../actions/redrawCanvas";
+import canvasProvider from "../types/canvasProvider";
+import edge from "../types/edge";
+import node from "../types/node";
+import "../styles/Header.scss";
 
 const Header = () => {
   const [source, setSource] = useState<number>(0);

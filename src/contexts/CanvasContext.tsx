@@ -4,8 +4,8 @@ import canvasProvider from "../types/canvasProvider";
 const initialState = {
   canvas: null,
   context: null,
-  setCanvas: (canvas: HTMLCanvasElement | null) => {},
-  setContext: (context: CanvasRenderingContext2D | null) => {},
+  setCanvas: () => {},
+  setContext: () => {},
 };
 
 export const CanvasContext = createContext<canvasProvider>(initialState);

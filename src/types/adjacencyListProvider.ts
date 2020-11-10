@@ -1,6 +1,6 @@
-import node from "../types/node";
-import edge from "../types/edge";
 import adjacencyListObject from "./adjacencyListObject";
+import edge from "../types/edge";
+import node from "../types/node";
 
 export default interface adjacencyListProvider {
   nodeList: node[];

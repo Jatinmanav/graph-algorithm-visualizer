@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import node from "../types/node";
 import { ReactComponent as DownArrow } from "../icons/down_arrow.svg";
 import { ReactComponent as UpArrow } from "../icons/up_arrow.svg";
+import node from "../types/node";
 
 type AppProps = {
   nodeList: node[];

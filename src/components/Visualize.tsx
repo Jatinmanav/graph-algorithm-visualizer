@@ -1,20 +1,20 @@
 import React, { useState, useContext } from "react";
-import "../styles/Visualize.scss";
-import visualizeAlgorithm from "../actions/visualizeAlgorithm";
-import edgeColor from "../actions/edgeColor";
-import topologicalSort from "../algorithms/topologicalSort";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
+import { CanvasContext } from "../contexts/CanvasContext";
+import { SnackbarContext } from "../contexts/SnackbarContext";
+import Algorithmdropdown from "../components/Algorithmdropdown";
+import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
+import cycleDetection from "../algorithms/cycleDetection";
+import depthFirstTraversal from "../algorithms/depthFirstTraversal";
+import topologicalSort from "../algorithms/topologicalSort";
+import edgeColor from "../actions/edgeColor";
+import visualizeAlgorithm from "../actions/visualizeAlgorithm";
+import visualizeColor from "../actions/visualizeColor";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import node from "../types/node";
-import { CanvasContext } from "../contexts/CanvasContext";
-import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
-import depthFirstTraversal from "../algorithms/depthFirstTraversal";
-import Algorithmdropdown from "../components/Algorithmdropdown";
-import cycleDetection from "../algorithms/cycleDetection";
-import { SnackbarContext } from "../contexts/SnackbarContext";
 import snackbarProvider from "../types/snackbarProvider";
-import visualizeColor from "../actions/visualizeColor";
+import "../styles/Visualize.scss";
 
 const Visualize = () => {
   const { nodeList, edgeList, adjacencyList } = useContext<

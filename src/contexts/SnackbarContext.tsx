@@ -4,7 +4,7 @@ import snackbarProvider from "../types/snackbarProvider";
 const initialState = {
   open: false,
   message: "",
-  toggleSnackbar: (message: string = "") => {},
+  toggleSnackbar: () => {},
 };
 
 export const SnackbarContext = createContext<snackbarProvider>(initialState);

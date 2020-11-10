@@ -2,17 +2,17 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { CanvasContext } from "../contexts/CanvasContext";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { ReactComponent as RightArrow } from "../icons/right_arrow.svg";
-import node from "../types/node";
-import contextMenu from "../types/contextMenu";
-import canvasProvider from "../types/canvasProvider";
-import adjacencyListProvider from "../types/adjacencyListProvider";
-import drawNode from "../actions/drawNode";
-import createNode from "../actions/createNode";
+import Newedge from "../components/Newedge";
 import contextMenuState from "../actions/contextMenuState";
+import createNode from "../actions/createNode";
+import drawNode from "../actions/drawNode";
+import edgeColor from "../actions/edgeColor";
 import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
-import edgeColor from "../actions/edgeColor";
-import Newedge from "./Newedge";
+import adjacencyListProvider from "../types/adjacencyListProvider";
+import canvasProvider from "../types/canvasProvider";
+import contextMenu from "../types/contextMenu";
+import node from "../types/node";
 
 type AppProps = {
   contextmenu: contextMenu;

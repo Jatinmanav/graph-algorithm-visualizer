@@ -1,7 +1,7 @@
-import node from "../types/node";
-import edge from "../types/edge";
 import drawNode from "../actions/drawNode";
 import drawEdge from "../actions/drawEdge";
+import node from "../types/node";
+import edge from "../types/edge";
 
 const redrawCanvas = (
   nodeList: node[],

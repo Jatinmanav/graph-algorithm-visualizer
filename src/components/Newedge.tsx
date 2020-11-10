@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import node from "../types/node";
-import edge from "../types/edge";
-import canvasProvider from "../types/canvasProvider";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
+import canvasProvider from "../types/canvasProvider";
+import edge from "../types/edge";
+import node from "../types/node";
 
 type AppProps = {
   source: number;

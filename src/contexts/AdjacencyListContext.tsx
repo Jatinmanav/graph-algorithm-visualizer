@@ -1,8 +1,8 @@
 import React, { createContext, useState, ReactNode } from "react";
-import node from "../types/node";
-import edge from "../types/edge";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import adjacencyListObject from "../types/adjacencyListObject";
+import edge from "../types/edge";
+import node from "../types/node";
 
 const initialState: adjacencyListProvider = {
   nodeList: [],
