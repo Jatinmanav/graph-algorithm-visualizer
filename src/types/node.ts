@@ -6,4 +6,6 @@ export default interface node {
   canvasY: number;
   windowX: number;
   windowY: number;
+  color: string;
+  visualize: boolean;
 }

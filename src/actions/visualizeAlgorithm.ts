@@ -1,12 +1,14 @@
-import drawNode from "../actions/drawNode";
-import drawEdge from "../actions/drawEdge";
+import edgeColor from "../actions/edgeColor";
 import node from "../types/node";
 import edge from "../types/edge";
+import redrawCanvas from "./redrawCanvas";
 
 const slowDrawNode = async (
+  nodeList: node[],
   resultList: node[],
+  edgeList: edge[],
+  canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
-  nodeColor: string,
   res: (value: boolean) => any
 ) => {
   let promises = [];
@@ -14,13 +16,25 @@ const slowDrawNode = async (
     promises.push(
       new Promise((res, rej) => {
         setTimeout(() => {
-          drawNode(item.count, context, item.canvasX, item.canvasY, nodeColor);
+          item.visualize = true;
+          redrawCanvas(
+            nodeList,
+            edgeList,
+            canvas,
+            context,
+            edgeColor(document)
+          );
           res(true);
         }, 1000 * resultList.findIndex((node) => node.count === item.count));
       })
     );
   }
-  Promise.all(promises).then(() => res(true));
+  Promise.all(promises).then(() => {
+    for (let item of resultList) {
+      item.visualize = false;
+    }
+    res(true);
+  });
 };
 
 const visualizeAlgorithm = (
@@ -28,9 +42,7 @@ const visualizeAlgorithm = (
   resultList: node[],
   edgeList: edge[],
   canvas: HTMLCanvasElement | null,
-  context: CanvasRenderingContext2D | null,
-  edgeColor: string,
-  highlightColor: string
+  context: CanvasRenderingContext2D | null
 ): Promise<boolean> => {
   if (canvas && context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -45,14 +57,9 @@ const visualizeAlgorithm = (
         item.windowY = rect.bottom;
       }
     }
-    for (let item of edgeList) {
-      drawEdge(item.source, item.target, item.directed, context, edgeColor);
-    }
-    for (let item of nodeList) {
-      drawNode(item.count, context, item.canvasX, item.canvasY, "#ffffff");
-    }
+    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
     return new Promise<boolean>((res) =>
-      slowDrawNode(resultList, context, highlightColor, res)
+      slowDrawNode(nodeList, resultList, edgeList, canvas, context, res)
     );
   }
   return new Promise<boolean>((res, rej) => {

@@ -5,7 +5,6 @@ import { ReactComponent as RightArrow } from "../icons/right_arrow.svg";
 import Newedge from "../components/Newedge";
 import contextMenuState from "../actions/contextMenuState";
 import createNode from "../actions/createNode";
-import drawNode from "../actions/drawNode";
 import edgeColor from "../actions/edgeColor";
 import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
@@ -13,6 +12,7 @@ import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import contextMenu from "../types/contextMenu";
 import node from "../types/node";
+import nodeColor from "../actions/nodeColor";
 
 type AppProps = {
   contextmenu: contextMenu;
@@ -119,7 +119,6 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
       const yPos = y - rect.top;
       if (context) {
         const nodeCount: number = getNextIndex(nodeList);
-        drawNode(nodeCount, context, xPos, yPos, "#ffffff");
         const newNode: node = createNode(
           nodeCount,
           xPos,
@@ -127,7 +126,8 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
           x,
           y,
           rect.right,
-          rect.bottom
+          rect.bottom,
+          nodeColor(document)
         );
         addNode(newNode);
       }

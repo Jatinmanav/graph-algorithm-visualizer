@@ -4,7 +4,6 @@ import { CanvasContext } from "../contexts/CanvasContext";
 import useWindowSize from "../hooks/windowSize";
 import Contextmenu from "../components/Contextmenu";
 import createNode from "../actions/createNode";
-import drawNode from "../actions/drawNode";
 import edgeColor from "../actions/edgeColor";
 import getNextIndex from "../actions/getNextIndex";
 import redrawCanvas from "../actions/redrawCanvas";
@@ -12,6 +11,7 @@ import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import contextMenu from "../types/contextMenu";
 import node from "../types/node";
+import nodeColor from "../actions/nodeColor";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
@@ -52,8 +52,7 @@ const Canvas = () => {
       canvas.height = window.innerHeight;
     }
     redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
-    //eslint-disable-next-line
-  }, [width, height, nodeList, edgeList, setCanvas, setContext]);
+  }, [width, height, nodeList, edgeList, context, setCanvas, setContext]);
 
   const handleRightClick = (event: React.MouseEvent): void => {
     event.preventDefault();
@@ -121,7 +120,6 @@ const Canvas = () => {
         const y = event.clientY - rect.top;
         if (context) {
           const nodeCount: number = getNextIndex(nodeList);
-          drawNode(nodeCount, context, x, y, "#ffffff");
           const newNode: node = createNode(
             nodeCount,
             x,
@@ -129,11 +127,10 @@ const Canvas = () => {
             event.clientX,
             event.clientY,
             rect.right,
-            rect.bottom
+            rect.bottom,
+            nodeColor(document)
           );
           addNode(newNode);
-          console.log(nodeList);
-          console.log(edgeList);
         }
       } else {
         if (button === 1) {

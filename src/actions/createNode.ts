@@ -7,7 +7,8 @@ const createNode = (
   clientX: number,
   clientY: number,
   windowX: number,
-  windowY: number
+  windowY: number,
+  color: string
 ): node => {
   const newNode: node = {
     count: count,
@@ -17,6 +18,8 @@ const createNode = (
     clientY: clientY,
     windowX: windowX,
     windowY: windowY,
+    color: color,
+    visualize: false,
   };
   return newNode;
 };

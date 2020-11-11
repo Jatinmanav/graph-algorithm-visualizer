@@ -7,9 +7,7 @@ import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
 import cycleDetection from "../algorithms/cycleDetection";
 import depthFirstTraversal from "../algorithms/depthFirstTraversal";
 import topologicalSort from "../algorithms/topologicalSort";
-import edgeColor from "../actions/edgeColor";
 import visualizeAlgorithm from "../actions/visualizeAlgorithm";
-import visualizeColor from "../actions/visualizeColor";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import node from "../types/node";
@@ -53,20 +51,14 @@ const Visualize = () => {
       }
     }
     console.log(edgeList);
-    visualizeAlgorithm(
-      nodeList,
-      resultNodes,
-      edgeList,
-      canvas,
-      context,
-      edgeColor(document),
-      visualizeColor(document)
-    ).then((val) => {
-      if (val && algorithm === 3) {
-        if (errorDetected) toggleSnackbar("Cycle Detected");
-        else toggleSnackbar("No Cycle Detected");
+    visualizeAlgorithm(nodeList, resultNodes, edgeList, canvas, context).then(
+      (val) => {
+        if (val && algorithm === 3) {
+          if (errorDetected) toggleSnackbar("Cycle Detected");
+          else toggleSnackbar("No Cycle Detected");
+        }
       }
-    });
+    );
   };
 
   return (
