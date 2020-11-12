@@ -10,7 +10,7 @@ const adjacencyListOne: adjacencyListObject[] = [];
 const nodeListOne: node[] = [];
 
 const adjacencyListTwo: adjacencyListObject[] = [{ count: 0, target: [] }];
-const nodeListTwo: node[] = [createNode(0, 100, 100, 100, 100, 500, 500)];
+const nodeListTwo: node[] = [createNode(0, 100, 100, 100, 100, 500, 500, "")];
 
 const adjacencyListThree: adjacencyListObject[] = [
   { count: 0, target: [1] },
