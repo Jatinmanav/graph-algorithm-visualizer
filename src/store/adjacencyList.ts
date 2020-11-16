@@ -30,9 +30,9 @@ const adjacencyListSlice = createSlice({
 
     DELETE_NODE: (state, action: PayloadAction<number>) => {},
 
-    ADD_EDGE: (state, action: PayloadAction<number>) => {},
+    ADD_EDGE: (state, action: PayloadAction<edge>) => {},
 
-    DELETE_EDGE: (state, action: PayloadAction<number>) => {},
+    DELETE_EDGE: (state, action: PayloadAction<edge>) => {},
   },
 });
 
