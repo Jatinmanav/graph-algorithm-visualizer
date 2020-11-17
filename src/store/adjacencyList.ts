@@ -21,14 +21,40 @@ const adjacencyListSlice = createSlice({
   reducers: {
     ADD_NODE: (state, action: PayloadAction<node>) => {
       action.payload.count = 0;
-      if (state.nodeList.length > 1)
+      if (state.nodeList.length >= 1)
         action.payload.count =
           state.nodeList[state.nodeList.length - 1].count + 1;
-      state.nodeList.push(action.payload);
-      state.adjacencyList.push({ count: action.payload.count, target: [] });
+      const newNode = action.payload;
+      const newAdjacencyListItem = { count: action.payload.count, target: [] };
+      return {
+        ...state,
+        nodeList: [...state.nodeList, newNode],
+        adjacencyList: [...state.adjacencyList, newAdjacencyListItem],
+      };
     },
 
-    DELETE_NODE: (state, action: PayloadAction<number>) => {},
+    DELETE_NODE: (state, action: PayloadAction<number>) => {
+      const nodeList = state.nodeList.filter(
+        (item) => item.count !== action.payload
+      );
+      let adjacencyList = state.adjacencyList.filter(
+        (item) => item.count !== action.payload
+      );
+      adjacencyList = JSON.parse(JSON.stringify(adjacencyList));
+      for (let item of adjacencyList) {
+        item.target = item.target.filter((itr) => itr !== action.payload);
+      }
+      const edgeList = state.edgeList.filter(
+        (item) =>
+          item.source.count !== action.payload &&
+          item.target.count !== action.payload
+      );
+      return {
+        nodeList,
+        edgeList,
+        adjacencyList,
+      };
+    },
 
     ADD_EDGE: (state, action: PayloadAction<edge>) => {},
 

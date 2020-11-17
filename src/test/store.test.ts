@@ -30,13 +30,13 @@ test("node is added to nodeList and adjacencyList when ADD_NODE is called", () =
 
 test("node is deleted from nodeList, adjacencyList and edgeList when DELETE_NODE is called", () => {
   const node = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node2 = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node3 = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node4 = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node5 = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node6 = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node7 = createNode(0, 100, 100, 100, 100, 100, 100, "");
-  const node8 = createNode(0, 100, 100, 100, 100, 100, 100, "");
+  const node2 = createNode(1, 100, 100, 100, 100, 100, 100, "");
+  const node3 = createNode(2, 100, 100, 100, 100, 100, 100, "");
+  const node4 = createNode(3, 100, 100, 100, 100, 100, 100, "");
+  const node5 = createNode(4, 100, 100, 100, 100, 100, 100, "");
+  const node6 = createNode(5, 100, 100, 100, 100, 100, 100, "");
+  const node7 = createNode(6, 100, 100, 100, 100, 100, 100, "");
+  const node8 = createNode(7, 100, 100, 100, 100, 100, 100, "");
 
   store?.dispatch(ADD_NODE(node));
   store?.dispatch(ADD_NODE(node2));
