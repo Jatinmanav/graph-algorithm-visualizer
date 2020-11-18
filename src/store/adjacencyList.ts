@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { stat } from "fs";
 import adjacencyListObject from "../types/adjacencyListObject";
 import edge from "../types/edge";
 import node from "../types/node";
@@ -56,7 +57,25 @@ const adjacencyListSlice = createSlice({
       };
     },
 
-    ADD_EDGE: (state, action: PayloadAction<edge>) => {},
+    ADD_EDGE: (state, action: PayloadAction<edge>) => {
+      const adjacencyList = JSON.parse(JSON.stringify(state.adjacencyList));
+      for (let item of adjacencyList) {
+        if (item.count === action.payload.source.count) {
+          item.target = [...item.target, action.payload.target.count];
+        }
+        if (
+          item.count === action.payload.target.count &&
+          action.payload.directed === false
+        ) {
+          item.target = [...item.target, action.payload.source.count];
+        }
+      }
+      return {
+        ...state,
+        edgeList: [...state.edgeList, action.payload],
+        adjacencyList,
+      };
+    },
 
     DELETE_EDGE: (state, action: PayloadAction<edge>) => {},
   },

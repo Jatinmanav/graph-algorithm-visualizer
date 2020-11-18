@@ -88,11 +88,13 @@ test("edge is added to edgeList and adjacencyList when ADD_EDGE is called", () =
   store?.dispatch(ADD_NODE(node8));
   store?.dispatch(ADD_EDGE(edge4));
 
+  console.log(adjacencyListState().adjacencyList);
+
   expect(adjacencyListState().edgeList.length).toEqual(2);
   expect(adjacencyListState().edgeList[0]).toEqual(edge3);
   expect(adjacencyListState().edgeList[1]).toEqual(edge4);
-  expect(adjacencyListState().adjacencyList[3].target[0]).toEqual(node5);
-  expect(adjacencyListState().adjacencyList[5].target[0]).toEqual(node8);
+  expect(adjacencyListState().adjacencyList[1].target[0]).toEqual(4);
+  expect(adjacencyListState().adjacencyList[3].target[0]).toEqual(6);
 });
 
 test("edge is deleted from edgeList and adjacencyList when DELETE_EDGE is called", () => {
@@ -136,8 +138,8 @@ test("edge is deleted from edgeList and adjacencyList when DELETE_EDGE is called
 
   expect(adjacencyListState().edgeList.length).toEqual(2);
   expect(adjacencyListState().adjacencyList[0].target.length).toEqual(0);
-  expect(adjacencyListState().adjacencyList[3].target[0]).toEqual(node8);
-  expect(adjacencyListState().adjacencyList[4].target.length).toEqual(1);
-  expect(adjacencyListState().adjacencyList[4].target[0]).toEqual(node8);
-  expect(adjacencyListState().adjacencyList[6].target[0]).toEqual(node5);
+  expect(adjacencyListState().adjacencyList[1].target[0]).toEqual(8);
+  expect(adjacencyListState().adjacencyList[2].target.length).toEqual(1);
+  expect(adjacencyListState().adjacencyList[2].target[0]).toEqual(6);
+  expect(adjacencyListState().adjacencyList[4].target[0]).toEqual(4);
 });
