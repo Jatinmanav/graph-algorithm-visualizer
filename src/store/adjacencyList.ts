@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stat } from "fs";
 import adjacencyListObject from "../types/adjacencyListObject";
 import edge from "../types/edge";
 import node from "../types/node";
