@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 import adjacencyListObject from "../types/adjacencyListObject";
 import edge from "../types/edge";
 import node from "../types/node";
@@ -107,6 +106,13 @@ const adjacencyListSlice = createSlice({
     },
   },
 });
+
+export const getNodeListSelector = (state: SliceState) => state.nodeList;
+
+export const getAdjacencyListSelector = (state: SliceState) =>
+  state.adjacencyList;
+
+export const getEdgeListSelector = (state: SliceState) => state.edgeList;
 
 export const {
   ADD_NODE,
