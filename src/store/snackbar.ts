@@ -30,9 +30,11 @@ const snackbarSlice = createSlice({
   },
 });
 
-export const getSnackBarStateReducer = (state: SliceState) => state.open;
+export const getSnackBarStateReducer = (state: { snackbar: SliceState }) =>
+  state.snackbar.open;
 
-export const getSnackBarMessageReducer = (state: SliceState) => state.message;
+export const getSnackBarMessageReducer = (state: { snackbar: SliceState }) =>
+  state.snackbar.message;
 
 export const { CLEAR_MESSAGE, SET_MESSAGE } = snackbarSlice.actions;
 export default snackbarSlice.reducer;

@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { SET_MESSAGE } from "../store/snackbar";
 import { AdjacencyListContext } from "../contexts/AdjacencyListContext";
 import { CanvasContext } from "../contexts/CanvasContext";
-import { SnackbarContext } from "../contexts/SnackbarContext";
 import Algorithmdropdown from "../components/Algorithmdropdown";
 import breadthFirstTraversal from "../algorithms/breadthFirstTraversal";
 import cycleDetection from "../algorithms/cycleDetection";
@@ -11,7 +12,6 @@ import visualizeAlgorithm from "../actions/visualizeAlgorithm";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import node from "../types/node";
-import snackbarProvider from "../types/snackbarProvider";
 import "../styles/Visualize.scss";
 
 const Visualize = () => {
@@ -19,8 +19,9 @@ const Visualize = () => {
     adjacencyListProvider
   >(AdjacencyListContext);
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  const { toggleSnackbar } = useContext<snackbarProvider>(SnackbarContext);
   const [algorithm, setAlgorithm] = useState<number>(0);
+
+  const dispatch = useDispatch();
 
   const algoList = [
     "Topological Sort",
@@ -54,8 +55,8 @@ const Visualize = () => {
     visualizeAlgorithm(nodeList, resultNodes, edgeList, canvas, context).then(
       (val) => {
         if (val && algorithm === 3) {
-          if (errorDetected) toggleSnackbar("Cycle Detected");
-          else toggleSnackbar("No Cycle Detected");
+          if (errorDetected) dispatch(SET_MESSAGE("Cycle Detected"));
+          else dispatch(SET_MESSAGE("No Cyle Detected"));
         }
       }
     );

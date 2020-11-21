@@ -1,20 +1,26 @@
-import React, { useContext } from "react";
-import { SnackbarContext } from "../contexts/SnackbarContext";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CLEAR_MESSAGE,
+  getSnackBarMessageReducer,
+  getSnackBarStateReducer,
+} from "../store/snackbar";
 import { ReactComponent as CloseIcon } from "../icons/close.svg";
-import snackbarProvider from "../types/snackbarProvider";
 import "../styles/Snackbar.scss";
 
 const Snackbar = () => {
-  const { open, message, toggleSnackbar } = useContext<snackbarProvider>(
-    SnackbarContext
-  );
+  const dispatch = useDispatch();
+
+  const open = useSelector(getSnackBarStateReducer);
+  const message = useSelector(getSnackBarMessageReducer);
+
   return (
     <div>
       {open ? (
         <div className="snackbar-container">
           <p className="snackbar-text">{message}</p>
           <CloseIcon
-            onClick={() => toggleSnackbar()}
+            onClick={() => dispatch(CLEAR_MESSAGE())}
             className="snackbar-close-icon"
           />
         </div>

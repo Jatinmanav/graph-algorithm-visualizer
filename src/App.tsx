@@ -1,27 +1,30 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { AdjacencyListContextProvider } from "./contexts/AdjacencyListContext";
 import { CanvasContextProvider } from "./contexts/CanvasContext";
-import { SnackbarContextProvider } from "./contexts/SnackbarContext";
 import Header from "./components/Header";
 import Canvas from "./components/Canvas";
 import Visualize from "./components/Visualize";
 import Snackbar from "./components/Snackbar";
+import configureStore from "./store/configureStore";
 import "./styles/Variables.scss";
 import "./styles/App.scss";
 
 const App: React.FC = () => {
+  const store = configureStore();
+
   return (
     <div className="App">
       <AdjacencyListContextProvider>
         <CanvasContextProvider>
-          <SnackbarContextProvider>
+          <Provider store={store}>
             <Header />
             <div className="container">
               <Canvas />
               <Visualize />
               <Snackbar />
             </div>
-          </SnackbarContextProvider>
+          </Provider>
         </CanvasContextProvider>
       </AdjacencyListContextProvider>
     </div>
