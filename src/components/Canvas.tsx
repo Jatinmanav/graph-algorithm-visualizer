@@ -16,6 +16,7 @@ import nodeColor from "../actions/nodeColor";
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
   const [nodetomove, setNodetomove] = useState<node | null>(null);
+  const [createnewnode, setCreatenewnode] = useState<boolean>(false);
   const [button, setButton] = useState<number>(0);
   const [contextmenu, setContextMenu] = useState<contextMenu>(
     initialContextMenu
@@ -82,6 +83,8 @@ const Canvas = () => {
         node.canvasX = x - rect.left;
         node.canvasY = y - rect.top;
         setNodetomove(node);
+      } else {
+        setCreatenewnode(true);
       }
     }
     if (event.buttons === 2) {
@@ -106,6 +109,7 @@ const Canvas = () => {
       moveNode(nodetomove);
       redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
     }
+    setCreatenewnode(false);
   };
 
   const handleMouseUp = (event: React.MouseEvent): void => {
@@ -114,7 +118,7 @@ const Canvas = () => {
     if (nodetomove) {
       setNodetomove(null);
     } else {
-      if (contextmenu.isOpen === false && canvas) {
+      if (contextmenu.isOpen === false && createnewnode === true && canvas) {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
