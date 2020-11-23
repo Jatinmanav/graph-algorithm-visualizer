@@ -17,7 +17,6 @@ const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
   const [nodetomove, setNodetomove] = useState<node | null>(null);
   const [createnewnode, setCreatenewnode] = useState<boolean>(false);
-  const [button, setButton] = useState<number>(0);
   const [contextmenu, setContextMenu] = useState<contextMenu>(
     initialContextMenu
   );
@@ -61,30 +60,32 @@ const Canvas = () => {
 
   const handleMouseDown = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setButton(event.buttons);
     if (canvas && event.buttons === 1) {
-      const x = event.clientX;
-      const y = event.clientY;
-      const rect = canvas.getBoundingClientRect();
-      let index: number = -1;
-      for (let iter in nodeList) {
-        if (
-          Math.abs(x - nodeList[iter].clientX) < 20 &&
-          Math.abs(y - nodeList[iter].clientY) < 20
-        ) {
-          index = +iter;
+      if (contextmenu.isOpen === true) setContextMenuState(false);
+      else {
+        const x = event.clientX;
+        const y = event.clientY;
+        const rect = canvas.getBoundingClientRect();
+        let index: number = -1;
+        for (let iter in nodeList) {
+          if (
+            Math.abs(x - nodeList[iter].clientX) < 20 &&
+            Math.abs(y - nodeList[iter].clientY) < 20
+          ) {
+            index = +iter;
+          }
         }
-      }
-      if (index > -1) {
-        console.log(index);
-        let node = nodeList[index];
-        node.clientX = x;
-        node.clientY = y;
-        node.canvasX = x - rect.left;
-        node.canvasY = y - rect.top;
-        setNodetomove(node);
-      } else {
-        setCreatenewnode(true);
+        if (index > -1) {
+          console.log(index);
+          let node = nodeList[index];
+          node.clientX = x;
+          node.clientY = y;
+          node.canvasX = x - rect.left;
+          node.canvasY = y - rect.top;
+          setNodetomove(node);
+        } else {
+          setCreatenewnode(true);
+        }
       }
     }
     if (event.buttons === 2) {
@@ -135,10 +136,6 @@ const Canvas = () => {
             nodeColor(document)
           );
           addNode(newNode);
-        }
-      } else {
-        if (button === 1) {
-          setContextMenuState(false);
         }
       }
     }
