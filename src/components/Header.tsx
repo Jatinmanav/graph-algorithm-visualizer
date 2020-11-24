@@ -7,6 +7,8 @@ import canvasProvider from "../types/canvasProvider";
 import edge from "../types/edge";
 import node from "../types/node";
 import "../styles/Header.scss";
+import edgeColor from "../actions/edgeColor";
+import fontColor from "../actions/fontColor";
 
 const Header = () => {
   const [source, setSource] = useState<number>(0);
@@ -25,11 +27,25 @@ const Header = () => {
     if (value) {
       trans();
       document.documentElement.setAttribute("data-theme", "dark");
-      redrawCanvas(nodeList, edgeList, canvas, context, "#eeeeee");
+      redrawCanvas(
+        nodeList,
+        edgeList,
+        canvas,
+        context,
+        edgeColor(document),
+        fontColor(document)
+      );
     } else {
       trans();
       document.documentElement.setAttribute("data-theme", "light");
-      redrawCanvas(nodeList, edgeList, canvas, context, "#333333");
+      redrawCanvas(
+        nodeList,
+        edgeList,
+        canvas,
+        context,
+        edgeColor(document),
+        fontColor(document)
+      );
     }
   };
 

@@ -2,6 +2,7 @@ import edgeColor from "../actions/edgeColor";
 import node from "../types/node";
 import edge from "../types/edge";
 import redrawCanvas from "./redrawCanvas";
+import fontColor from "./fontColor";
 
 const slowDrawNode = async (
   nodeList: node[],
@@ -22,7 +23,8 @@ const slowDrawNode = async (
             edgeList,
             canvas,
             context,
-            edgeColor(document)
+            edgeColor(document),
+            fontColor(document)
           );
           res(true);
         }, 1000 * resultList.findIndex((node) => node.count === item.count));
@@ -57,7 +59,14 @@ const visualizeAlgorithm = (
         item.windowY = rect.bottom;
       }
     }
-    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
+    redrawCanvas(
+      nodeList,
+      edgeList,
+      canvas,
+      context,
+      edgeColor(document),
+      fontColor(document)
+    );
     return new Promise<boolean>((res) =>
       slowDrawNode(nodeList, resultList, edgeList, canvas, context, res)
     );

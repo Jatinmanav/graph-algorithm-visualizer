@@ -22,14 +22,14 @@ function drawArrowhead(
   context.moveTo(x, y);
 
   angle += (1.0 / 3.0) * (2 * Math.PI);
-  x = radius * Math.cos(angle) + x_center;
-  y = radius * Math.sin(angle) + y_center;
+  x = 0.9 * radius * Math.cos(angle) + x_center;
+  y = 0.9 * radius * Math.sin(angle) + y_center;
 
   context.lineTo(x, y);
 
   angle += (1.0 / 3.0) * (2 * Math.PI);
-  x = radius * Math.cos(angle) + x_center;
-  y = radius * Math.sin(angle) + y_center;
+  x = 0.9 * radius * Math.cos(angle) + x_center;
+  y = 0.9 * radius * Math.sin(angle) + y_center;
 
   context.lineTo(x, y);
 

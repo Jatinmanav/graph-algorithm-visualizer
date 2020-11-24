@@ -10,7 +10,8 @@ const redrawCanvas = (
   edgeList: edge[],
   canvas: HTMLCanvasElement | null,
   context: CanvasRenderingContext2D | null,
-  edgeColor: string
+  edgeColor: string,
+  nodeTextColor: string
 ) => {
   if (canvas && context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -36,7 +37,14 @@ const redrawCanvas = (
       if (item.visualize) {
         item.color = visualizeColor(document);
       }
-      drawNode(item.count, context, item.canvasX, item.canvasY, item.color);
+      drawNode(
+        item.count,
+        context,
+        item.canvasX,
+        item.canvasY,
+        item.color,
+        nodeTextColor
+      );
     }
   }
 };

@@ -12,6 +12,7 @@ import canvasProvider from "../types/canvasProvider";
 import contextMenu from "../types/contextMenu";
 import node from "../types/node";
 import nodeColor from "../actions/nodeColor";
+import fontColor from "../actions/fontColor";
 
 const Canvas = () => {
   const initialContextMenu: contextMenu = { isOpen: false, x: 0, y: 0 };
@@ -51,7 +52,14 @@ const Canvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
+    redrawCanvas(
+      nodeList,
+      edgeList,
+      canvas,
+      context,
+      edgeColor(document),
+      fontColor(document)
+    );
   }, [width, height, nodeList, edgeList, context, setCanvas, setContext]);
 
   const handleRightClick = (event: React.MouseEvent): void => {
@@ -108,7 +116,14 @@ const Canvas = () => {
       setNodetomove(node);
 
       moveNode(nodetomove);
-      redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
+      redrawCanvas(
+        nodeList,
+        edgeList,
+        canvas,
+        context,
+        edgeColor(document),
+        fontColor(document)
+      );
     }
     setCreatenewnode(false);
   };

@@ -5,9 +5,7 @@ import { ReactComponent as RightArrow } from "../icons/right_arrow.svg";
 import Newedge from "../components/Newedge";
 import contextMenuState from "../actions/contextMenuState";
 import createNode from "../actions/createNode";
-import edgeColor from "../actions/edgeColor";
 import getNextIndex from "../actions/getNextIndex";
-import redrawCanvas from "../actions/redrawCanvas";
 import adjacencyListProvider from "../types/adjacencyListProvider";
 import canvasProvider from "../types/canvasProvider";
 import contextMenu from "../types/contextMenu";
@@ -51,7 +49,7 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const divElementTwo = useRef<HTMLDivElement>(null);
   const { x, y } = contextmenu;
   const { canvas, context } = useContext<canvasProvider>(CanvasContext);
-  const { nodeList, edgeList, addNode, clearNodes, deleteNode } = useContext<
+  const { nodeList, addNode, clearNodes, deleteNode } = useContext<
     adjacencyListProvider
   >(AdjacencyListContext);
 
@@ -148,7 +146,6 @@ const Contextmenu = ({ contextmenu, setContextMenuState }: AppProps) => {
   const handleDeleteNode = (event: React.FormEvent<HTMLDivElement>): void => {
     event.preventDefault();
     deleteNode(x, y);
-    redrawCanvas(nodeList, edgeList, canvas, context, edgeColor(document));
     setContextMenuState(false);
   };
 
