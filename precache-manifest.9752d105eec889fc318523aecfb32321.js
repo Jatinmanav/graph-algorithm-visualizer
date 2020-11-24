@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cd2cf539e7cc50b7ade36d5d360b0c77",
+    "revision": "6a20ab85b25aade76e55cae68323c449",
     "url": "/graph-algorithm-visualizer/index.html"
   },
   {
-    "revision": "443a12ef4fc7fff512f9",
-    "url": "/graph-algorithm-visualizer/static/css/main.9111cec6.chunk.css"
+    "revision": "8622014dbc074bb10c99",
+    "url": "/graph-algorithm-visualizer/static/css/main.3bcf97fe.chunk.css"
   },
   {
-    "revision": "c37fa2c7fd257506b74e",
-    "url": "/graph-algorithm-visualizer/static/js/2.aa0dff7e.chunk.js"
+    "revision": "9f8d6ecf23ba8c60c459",
+    "url": "/graph-algorithm-visualizer/static/js/2.b8a91f3e.chunk.js"
   },
   {
-    "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/graph-algorithm-visualizer/static/js/2.aa0dff7e.chunk.js.LICENSE.txt"
+    "revision": "c64c486544348f10a6d6c716950bc223",
+    "url": "/graph-algorithm-visualizer/static/js/2.b8a91f3e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "443a12ef4fc7fff512f9",
-    "url": "/graph-algorithm-visualizer/static/js/main.c7e89917.chunk.js"
+    "revision": "8622014dbc074bb10c99",
+    "url": "/graph-algorithm-visualizer/static/js/main.7b0b639d.chunk.js"
   },
   {
     "revision": "984fec3f430f15dc0da5",
