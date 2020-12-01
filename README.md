@@ -4,6 +4,10 @@
 
 Graph Algorithm Visualizer built using React, Typescript and Redux.
 
+## Demo
+
+![demo](https://github.com/Jatinmanav/graph-algorithm-visualizer/raw/master/demo/output.gif)
+
 ## Dependencies
 
 - [React](https://reactjs.org/)
